@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ЭКО SMART бейбітшілік қала</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Montserrat:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* VOICE: салтанатты, жас зерттеушінің мақтанышы — ғылыми, бірақ жарқын
+   IDEA: бет Бекарыстың ұлттық шапаны сияқты — қою жасыл барқыт, алтын ою-өрнек
+   PICTURE: интерактивті 3D қала — шаңырақ, тұмар, домбыра, тайқазан пішінді ғимараттар
+   COLOUR+TYPE: шапан жасылы #0c3a2b, алтын #d6a841, піл сүйегі #f5efe0; Unbounded + Montserrat
+   LAYOUT: жасыл және ақшыл жолақтар кезектеседі, әр бөлімнің шетінде алтын ою жиегі */
+:root{color-scheme:light dark;
+--green:#0c3a2b;--green2:#124a37;--deep:#082a1f;--gold:#d6a841;--gold2:#f0cd7a;--ivory:#f5efe0;
+--bg:light-dark(#f5efe0,#0a2a20);--ink:light-dark(#16261f,#eef0e6);--muted:light-dark(#4d5e55,#b7c5bb);
+--card:light-dark(#fffaf0,#113a2d);--line:light-dark(#e2d6b8,#24553f)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.62 Montserrat,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Unbounded,Montserrat,sans-serif;line-height:1.1;text-wrap:balance;margin:0 0 .5em}
+h2{font-size:clamp(28px,4vw,44px);font-weight:800}
+h3{font-size:19px;font-weight:600}
+p{margin:0 0 1em}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1240px;margin:0 auto}
+.band{padding:clamp(40px,6vw,88px) max(5vw,16px);position:relative}
+.dark{background:var(--green);color:#eef0e6;--ink:#eef0e6;--muted:#b9cbbf;--card:#124a37;--line:#2a6650}
+.deeper{background:var(--deep);color:#eef0e6;--ink:#eef0e6;--muted:#b9cbbf;--card:#103b2d;--line:#2a6650}
+.lead{font-size:18px;color:var(--muted);max-width:68ch}
+.kicker{color:var(--gold);font-weight:700;font-size:15px;margin-bottom:10px;display:block}
+.orn{height:28px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='28' viewBox='0 0 72 28'%3E%3Cg fill='none' stroke='%23d6a841' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M36 26V14c0-6-5-10-10-10S16 8 16 13s4 7 7 7 4-3 4-5-2-3-3-2'/%3E%3Cpath d='M36 14c0-6 5-10 10-10s10 4 10 9-4 7-7 7-4-3-4-5 2-3 3-2'/%3E%3Cpath d='M0 26h72'/%3E%3C/g%3E%3C/svg%3E") repeat-x center/72px 28px;opacity:.9}
+/* nav */
+nav{position:sticky;top:0;z-index:50;background:rgba(8,42,31,.94);backdrop-filter:blur(8px);border-bottom:1px solid #d6a84155}
+nav .in{display:flex;align-items:center;gap:18px;max-width:1240px;margin:0 auto;padding:0 max(5vw,16px)}
+.brand{font-family:Unbounded;font-weight:800;color:var(--gold);white-space:nowrap;font-size:15px;text-decoration:none}
+.scroll{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.scroll a{flex:none;color:#e6eadf;text-decoration:none;font-size:14px;font-weight:500;padding:14px 10px;border-bottom:2px solid transparent}
+.scroll a:hover,.scroll a:focus-visible{color:var(--gold2);border-color:var(--gold);outline:none}
+/* hero */
+.hero{background:radial-gradient(1200px 600px at 75% 10%,#1d6b4f 0,transparent 60%),linear-gradient(160deg,#0c3a2b,#06231a);color:#f3f1e7;padding:clamp(36px,5vw,72px) max(5vw,16px) clamp(40px,5vw,70px);position:relative;overflow:hidden}
+.hero .grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(28px,5vw,72px);align-items:center;max-width:1240px;margin:0 auto}
+.portrait{perspective:1100px;justify-self:center;width:min(100%,430px)}
+.frame{position:relative;border-radius:220px 220px 22px 22px;padding:12px;background:linear-gradient(145deg,#f0cd7a,#a87a22 55%,#f0cd7a);box-shadow:0 40px 70px -20px #000a,0 0 0 1px #fff3 inset;transform-style:preserve-3d;transition:transform .25s ease-out}
+.frame img{border-radius:210px 210px 14px 14px;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 12%;background:#eee}
+.frame::after{content:"";position:absolute;inset:-26px;border:2px solid #d6a84166;border-radius:240px 240px 34px 34px;transform:translateZ(-40px);pointer-events:none}
+.badge3d{position:absolute;right:-14px;bottom:34px;background:var(--deep);border:1px solid var(--gold);color:var(--gold2);border-radius:14px;padding:10px 14px;font:600 13px/1.3 Unbounded;transform:translateZ(60px);box-shadow:0 14px 30px #0007}
+.hero h1{font-size:clamp(34px,5.2vw,62px);font-weight:800;margin:6px 0 18px}
+.hero h1 b{color:var(--gold)}
+.who{font-family:Unbounded;font-size:clamp(20px,2.4vw,26px);font-weight:600;margin:0 0 6px}
+.meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:22px 0 26px}
+.meta div{background:#ffffff0d;border:1px solid #d6a84140;border-radius:14px;padding:12px 14px}
+.meta small{display:block;color:#c4d3c8;font-size:13px}
+.meta strong{font-size:16px}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 20px;border-radius:999px;font:600 15px Montserrat;text-decoration:none;border:1px solid var(--gold);cursor:pointer;background:transparent;color:inherit}
+.btn.gold{background:var(--gold);color:#1b1505;border-color:var(--gold)}
+.btn:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px}
+.card h3{margin-bottom:8px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(22px,4vw,56px);align-items:start}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 16px}
+.tab{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 15px Montserrat;cursor:pointer}
+.tab[aria-selected=true]{background:var(--gold);color:#1b1505;border-color:var(--gold)}
+.abs{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px 26px}
+.abs p{max-width:75ch}
+ol.tasks{counter-reset:t;list-style:none;padding:0;margin:0;display:grid;gap:10px}
+ol.tasks li{counter-increment:t;display:grid;grid-template-columns:38px minmax(0,1fr);gap:12px;align-items:start}
+ol.tasks li::before{content:counter(t);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:#1b1505;font:700 14px Unbounded}
+/* media */
+.ph{border-radius:18px;overflow:hidden;background:#0003;position:relative;cursor:zoom-in;border:1px solid var(--line)}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.ph:hover img{transform:scale(1.04)}
+.ph figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 10px;background:linear-gradient(transparent,#000b);color:#fff;font-size:14px;font-weight:500}
+video{width:100%;border-radius:18px;background:#000;display:block;border:1px solid var(--line)}
+.problem{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(22px,4vw,48px);align-items:center}
+/* 3D */
+.city{position:relative;height:clamp(420px,62vw,640px);border-radius:24px;overflow:hidden;border:2px solid var(--gold);background:linear-gradient(#bfe6ef,#e9f6e8);box-shadow:0 30px 60px -30px #000c}
+.city canvas{position:absolute;inset:0;width:100%!important;height:100%!important;display:block;touch-action:none}
+.ctrl{position:absolute;top:12px;left:12px;right:12px;display:flex;gap:8px;flex-wrap:wrap;z-index:3}
+.ctrl button{min-height:44px;padding:0 14px;border-radius:12px;border:1px solid #d6a841;background:#082a1fdd;color:#f6eed6;font:600 14px Montserrat;cursor:pointer}
+.ctrl button[aria-pressed=true]{background:var(--gold);color:#1b1505}
+.lbl{position:absolute;z-index:2;transform:translate(-50%,-100%);background:#fffdf5;color:#0c3a2b;border:1px solid #d6a841;border-radius:999px;padding:5px 11px;font:600 12.5px Montserrat;white-space:nowrap;pointer-events:auto;cursor:pointer;box-shadow:0 6px 14px #0003}
+.lbl.sel{background:var(--gold);color:#1b1505}
+.info{position:absolute;z-index:4;right:12px;bottom:12px;width:min(360px,calc(100% - 24px));background:#082a1ff0;color:#eef0e6;border:1px solid var(--gold);border-radius:16px;padding:16px 18px;font-size:14.5px;line-height:1.5}
+.info h3{color:var(--gold2);font-size:17px;margin-bottom:6px}
+.info .x{position:absolute;top:6px;right:6px;width:40px;height:40px;border:0;background:none;color:#fff;font-size:22px;cursor:pointer}
+.hint{font-size:14px;color:var(--muted);margin-top:10px}
+.blist{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:10px;margin-top:18px}
+.blist button{text-align:start;min-height:48px;padding:10px 14px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 14.5px Montserrat;cursor:pointer}
+.blist button:hover,.blist button:focus-visible{border-color:var(--gold);outline:none}
+/* solutions */
+.sol{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:18px}
+.sol .card{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.sol .card .ph{border-radius:0;border:0;aspect-ratio:428/360}
+.sol .card .tx{padding:16px 20px 20px}
+.sol ul{margin:0;padding-left:18px;color:var(--muted)}
+.maps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:14px}
+.maps .ph{aspect-ratio:386/318}
+.maps .ph img{object-fit:contain;background:#eef3ee}
+/* economy */
+.calc{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:22px;align-items:stretch}
+.inputs{display:grid;gap:14px}
+.inputs label{display:grid;gap:6px;font-weight:600;font-size:15px}
+.inputs input{font:16px Montserrat;min-height:46px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.inputs input:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
+.result{background:linear-gradient(150deg,#0c3a2b,#165a42);color:#f4f2e8;border-radius:22px;padding:24px 26px;display:flex;flex-direction:column;justify-content:center;border:1px solid var(--gold)}
+.result .big{font:800 clamp(22px,4.6vw,54px)/1.05 Unbounded;color:var(--gold2);white-space:nowrap}
+.result .row{display:flex;flex-wrap:wrap;gap:22px;margin-top:16px}
+.result .row div{font-size:14px;color:#c9d8cd}
+.result .row b{display:block;font:700 20px Unbounded;color:#fff;white-space:nowrap}
+.formula{font-family:Unbounded;font-size:14px;color:var(--gold2);margin-top:12px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:700;background:#d6a8411f}
+td.n,th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+tfoot td{font-weight:700}
+.tbl{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.tbl h3{padding:16px 18px 4px}
+.note{font-size:14px;color:var(--muted);margin-top:10px}
+.fig{position:relative;min-height:340px}.fig>svg{position:absolute;inset:0;width:100%;height:100%}
+.chartbox{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px;font-weight:700}
+.flow span{background:var(--gold);color:#1b1505;padding:10px 16px;border-radius:999px}
+.flow em{font-style:normal;color:var(--gold)}
+/* platform */
+.plat{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px;counter-reset:p}
+.plat .card{counter-increment:p;position:relative;padding-top:56px}
+.plat .card::before{content:counter(p);position:absolute;top:16px;left:22px;width:32px;height:32px;border-radius:9px;background:var(--gold);color:#1b1505;display:grid;place-items:center;font:700 14px Unbounded;border-radius:50%}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px;margin-top:22px}
+.shots .ph{aspect-ratio:1280/591}
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:210px;grid-auto-flow:dense;gap:12px}
+.gal .w2{grid-column:span 2}.gal .h2{grid-row:span 2}
+.vids{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;margin-top:22px}
+.vids h3{font-size:16px;margin-top:10px}
+blockquote{font:600 clamp(20px,2.6vw,28px)/1.35 Unbounded;margin:26px 0 0;padding:22px 26px;border-left:4px solid var(--gold);background:#d6a8411a;border-radius:0 18px 18px 0}
+.refs{columns:2 340px;column-gap:40px;padding-left:20px}
+.refs li{break-inside:avoid;margin-bottom:10px;color:var(--muted)}
+footer{background:var(--deep);color:#c8d6cc;padding:34px max(5vw,16px);font-size:14.5px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between}
+footer b{color:var(--gold2)}
+/* lightbox */
+#lb{position:fixed;inset:0;background:#000d;z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+#lb.on{display:flex}
+#lb img{max-width:min(1100px,100%);max-height:86vh;border-radius:12px}
+#lb button{position:absolute;top:12px;right:12px;width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:#082a1f;color:#fff;font-size:24px;cursor:pointer}
+.reveal{opacity:0;transform:translateY(24px) rotateX(8deg);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.frame{transition:none}html{scroll-behavior:auto}}
+@media(max-width:900px){.hero .grid,.two,.problem,.calc,.vids{grid-template-columns:minmax(0,1fr)}.gal{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:170px}.brand{display:none}}
+@media(max-width:600px){.meta{grid-template-columns:minmax(0,1fr)}.badge3d{right:6px}.gal .w2{grid-column:span 2}.lbl{font-size:11px;padding:4px 8px}
+table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--line)}.stack td{display:flow-root;border:0;padding:3px 12px;padding-inline-start:9em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:8.5em;margin-inline-start:-8.6em;white-space:normal;color:var(--muted);font-weight:600}.stack td:empty{display:none}}
+pre,.scroll{overflow-x:auto}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+<nav aria-label="Бөлімдер"><div class="in">
+<a class="brand" href="#top">ЭКО SMART</a>
+<div class="scroll">
+<a href="#about">Жоба туралы</a><a href="#problem">Өзектілік</a><a href="#city3d">3D қала</a><a href="#solutions">Шешімдер</a><a href="#map">Карта</a><a href="#economy">Экономика</a><a href="#ai">ЖИ сұрыптау</a><a href="#platform">Платформа</a><a href="#practice">Тәжірибе</a><a href="#results">Нәтиже</a><a href="#refs">Әдебиет</a>
+</div></div></nav>
+
+<header class="hero" id="top">
+<div class="grid">
+<div class="portrait"><div class="frame" id="frame">
+<img src="img/bekarys.jpg" alt="Утаргалиев Бекарыс ұлттық киімде" width="820" height="998">
+<div class="badge3d">Жоба авторы<br>9 «Ә» сынып</div>
+</div></div>
+<div>
+<span class="kicker">Ғылыми жоба · Жаратылыстану-математика бағыты · Креативті индустрия секциясы</span>
+<h1>ЭКО SMART <b>бейбітшілік</b> қала</h1>
+<p class="who">Утаргалиев Бекарыс Аскарұлы</p>
+<p style="color:#cfdcd2;margin:0">9 «Ә» сынып оқушысы</p>
+<div class="meta">
+<div><small>Мектебі</small><strong>№169 мектеп-лицейі</strong></div>
+<div><small>Қаласы, ауданы</small><strong>Алматы қ., Алатау ауданы</strong></div>
+<div><small>Жоба жетекшісі</small><strong>Турлашева Алина Маратовна</strong></div>
+<div><small>Орындалған жылы</small><strong>2026 жыл</strong></div>
+</div>
+<div class="btns"><a class="btn gold" href="#city3d">3D қаланы айналдыру</a><a class="btn" href="#economy">Қаражатты есептеу</a></div>
+</div>
+</div>
+</header>
+<div class="orn" style="background-color:#06231a"></div>
+
+<section class="band" id="about"><div class="wrap">
+<span class="kicker">Аңдатпа</span>
+<h2>Қоқыс — қала салатын ресурс</h2>
+<div class="tabs" role="tablist" aria-label="Аңдатпа тілі">
+<button class="tab" role="tab" aria-selected="true" data-l="kk" id="t-kk">Қазақша</button>
+<button class="tab" role="tab" aria-selected="false" data-l="ru" id="t-ru">Русский</button>
+<button class="tab" role="tab" aria-selected="false" data-l="en" id="t-en">English</button>
+</div>
+<div class="abs">
+<div data-p="kk"><p>Бұл ғылыми жобада Алматы қаласының экологиялық жағдайын жақсарту, тұрмыстық қалдықтарды тиімді сұрыптау және қайта өңдеу, заманауи Smart-технологияларды енгізу арқылы болашақтың таза, қауіпсіз және интеллектуалды қаласын қалыптастыру мәселелері қарастырылады. Зерттеудің негізгі мақсаты — Алматының экологиялық мәселелерін шешуге бағытталған авторлық «ЭКО SMART бейбітшілік қала» моделін ұсыну.</p><p>Жобаның басты ерекшелігі — экология, жасанды интеллект, экономикалық тиімділік, заманауи сәулет өнері және қазақтың ұлттық мәдениетін біртұтас жүйеге біріктіру. Ақылды үйлер, автоматты суару жүйелері, экологиялық көлік, ақылды аялдамалар, күн панельдері, роботтандырылған қызметтер және ЖИ арқылы қалдықтарды сұрыптау технологиялары ұсынылды. Экономикалық бөлімде Алматы мектептері бойынша және қалдықтардың түрлерін қайта өңдеуден алынуы мүмкін табыс есептелді. Маңызды жаңашылдығы — автордың жеке бастамасымен әзірленген <b>3D SMART CITY</b> платформасы.</p><p><b>Түйін сөздер:</b> ЭКО SMART қала, Алматы, экология, жасанды интеллект, қалдықтарды қайта өңдеу, 3D модельдеу, Smart City, экономикалық тиімділік, жасыл технология, ұлттық сәулет.</p></div>
+<div data-p="ru" hidden><p>В работе рассматриваются возможности улучшения экологической ситуации Алматы посредством эффективной сортировки и переработки бытовых отходов, внедрения интеллектуальных технологий и создания экологически безопасной городской среды. Цель — разработать авторскую модель «ЭКО SMART — город мира».</p><p>Особенность проекта — объединение экологии, искусственного интеллекта, экономических расчётов, современной архитектуры и национальной культуры Казахстана. Предлагаются умные дома, автоматизированный полив, экологичный транспорт, интеллектуальные остановки, солнечные панели, роботизированные службы и сортировка отходов с помощью ИИ. Важная инновационная составляющая — авторская платформа <b>3D SMART CITY</b> для визуального проектирования будущего города.</p><p><b>Ключевые слова:</b> ЭКО SMART город, Алматы, экология, искусственный интеллект, переработка отходов, 3D-моделирование, умный город, зелёные технологии, национальная архитектура.</p></div>
+<div data-p="en" hidden><p>This project explores how to improve Almaty's environment through effective household waste separation and recycling, Smart technologies and a clean, safe, intelligent urban environment. Its objective is an original model, the «ECO SMART Peaceful City».</p><p>The project integrates environmental protection, artificial intelligence, economic calculations, modern architecture and traditional Kazakh cultural elements. Proposed solutions include smart homes, automated irrigation, eco-friendly transport, intelligent bus stops, solar panels, robotic services and AI waste sorting. A key innovation is the author's <b>3D SMART CITY</b> platform for designing the future city in three dimensions.</p><p><b>Keywords:</b> ECO SMART City, Almaty, ecology, artificial intelligence, waste recycling, 3D modelling, Smart City, green technology, national architecture.</p></div>
+</div>
+
+<div class="two" style="margin-top:40px">
+<div>
+<h3 style="font-size:24px">Жобаның мақсаты</h3>
+<p class="lead">Алматы қаласында қалдықтарды сұрыптау және қайта өңдеу жүйесін дамыту арқылы экологиялық жағдайды жақсарту, сондай-ақ қазақи нақыштағы заманауи ғимараттары бар таза әрі көркем эко-қала үлгісін қалыптастыру.</p>
+<div class="cards" style="margin-top:20px">
+<div class="card"><h3>Зерттеу объектісі</h3><p style="margin:0;color:var(--muted)">Алматы қаласының экологиялық қауіпсіздігі мен қалдықтарды басқару жүйесі</p></div>
+<div class="card"><h3>Зерттеу аймағы</h3><p style="margin:0;color:var(--muted)">Университеттер, колледждер, мектептер, балабақшалар, саябақтар, тұрғын үйлер, дүкендер, демалыс орындары</p></div>
+</div>
+</div>
+<div>
+<h3 style="font-size:24px">Міндеттері</h3>
+<ol class="tasks" id="tasks"></ol>
+</div>
+</div>
+</div></section>
+
+<section class="band dark" id="problem"><div class="wrap">
+<div class="problem">
+<figure class="ph" style="margin:0;aspect-ratio:16/9"><img src="img/problem.jpg" alt="Қоқыс басқан қала көшесі" loading="lazy"><figcaption>Мәселе: қалдықтар дұрыс өңделмесе, қала тұншығады</figcaption></figure>
+<div>
+<span class="kicker">Жобаның өзектілігі</span>
+<h2>Неге бұл маңызды?</h2>
+<p>Қоқыс пен тұрмыстық қалдықтардың дұрыс өңделмеуі Алматының экологиясына айтарлықтай кері әсер етеді. Ауа, су және топырақтың ластануы тұрғындардың денсаулығына қауіп төндіреді: аллергия, тыныс алу жолдарының аурулары, балалардың даму бұзылыстары туындауы мүмкін.</p>
+<p style="color:var(--muted)">Табиғи экожүйелер — жануарлар мен өсімдіктер де зардап шегеді. Көгалдандыру, қалдықтарды дұрыс басқару және экологиялық тәрбие қаланың өмір сапасын жақсартып, биоәртүрлілікті сақтауға мүмкіндік береді.</p>
+</div>
+</div>
+<div class="vids" style="grid-template-columns:minmax(0,1fr)">
+<div><video controls preload="none" poster="img/idea-poster.jpg" playsinline><source src="media/idea.mp4" type="video/mp4"></video><h3>Жоба идеясы бейнеде: ластанған қаладан — ЭКО SMART қалаға</h3></div>
+</div>
+</div></section>
+
+<section class="band deeper" id="city3d"><div class="wrap">
+<span class="kicker">Авторлық 3D SMART CITY</span>
+<h2>Қазақи нақыштағы болашақ қала</h2>
+<p class="lead">Қаланы тышқанмен немесе саусақпен айналдырыңыз, жақындатыңыз. Ғимаратты немесе оның атауын басқанда — оның қызметі шығады.</p>
+<div class="city" id="city">
+<div class="ctrl">
+<button id="bRot" aria-pressed="true">Автоайналу</button>
+<button id="bNight" aria-pressed="false">Түн</button>
+<button id="bHome">Бастапқы көрініс</button>
+<button id="bLbl" aria-pressed="true">Атаулар</button>
+</div>
+<div class="info" id="info" hidden><button class="x" id="infoX" aria-label="Жабу">×</button><h3 id="infoH"></h3><div id="infoP"></div></div>
+<p id="noGL" hidden style="position:absolute;inset:auto 16px 16px;color:#0c3a2b;font-weight:600">3D көрініс бұл құрылғыда ашылмады. Төмендегі тізімнен ғимараттар туралы оқи аласыз.</p>
+</div>
+<div class="blist" id="blist"></div>
+</div></section>
+<div class="orn" style="background-color:#082a1f"></div>
+
+<section class="band" id="solutions"><div class="wrap">
+<span class="kicker">Жобаның компоненттері</span>
+<h2>Қаланы ақылды ететін шешімдер</h2>
+<p class="lead">Әр бағыт бір мақсатқа қызмет етеді: таза ауа, қауіпсіз үй, жасыл көше және ресурсқа айналған қалдық.</p>
+<div class="sol" id="sol"></div>
+</div></section>
+
+<section class="band dark" id="map"><div class="wrap">
+<span class="kicker">«ЭКО SMART бейбітшілік қала» картасы</span>
+<h2>Алматының жаңа келбеті картада</h2>
+<p class="lead">Жоба нысандары Алматы картасына түсірілді: тарихи орындар, саябақтар, тұрғын үйлер, білім мекемелері және қалдық қабылдайтын бекеттер.</p>
+<div class="maps" id="maps"></div>
+</div></section>
+
+<section class="band" id="economy"><div class="wrap">
+<span class="kicker">Экономикалық және математикалық есеп</span>
+<h2>Сұрыпталған қалдық — қаражат</h2>
+<p class="lead">Мектеп оқушылары мен мұғалімдері макулатура жинаса, қанша түсім болады? Сандарды өзгертіп, өзіңіз есептеңіз.</p>
+<div class="tabs" role="tablist" aria-label="Есеп үлгісі">
+<button class="tab" aria-selected="true" data-pre="0">№169 мектеп-лицейі</button>
+<button class="tab" aria-selected="false" data-pre="1">Алматының 349 мектебі</button>
+</div>
+<div class="calc">
+<div class="inputs">
+<label for="cP">Адам саны<input id="cP" type="number" min="0" inputmode="numeric" value="2420"></label>
+<label for="cK">Бір адам жылына жинайтын қағаз, кг<input id="cK" type="number" min="0" step="1" value="40"></label>
+<label for="cR">Қабылдау бағасы, теңге/кг<input id="cR" type="number" min="0" step="1" value="40"></label>
+<p class="note" id="cNote" style="margin:0">Оқушы 2240 + мұғалім 180 = 2420 адам. Әр адам тоқсанына 10 кг → жылына 40 кг.</p>
+</div>
+<div class="result" aria-live="polite">
+<div style="font-size:15px;color:#c9d8cd">Жылдық болжамды түсім</div>
+<div class="big" id="cOut">3 872 000 ₸</div>
+<div class="row"><div>Жиналатын қағаз<b id="cKg">96,8 т</b></div><div>Бір адамнан<b id="cOne">1 600 ₸</b></div><div>10 жылда (өсімсіз)<b id="c10">38 720 000 ₸</b></div></div>
+<div class="formula">Түсім = адам саны × кг × баға</div>
+</div>
+</div>
+
+<div class="two" style="margin-top:34px">
+<div class="tbl"><h3>Қалдық түрлері бойынша есеп (2 200 000 тұрғын)</h3>
+<table class="stack"><thead><tr><th>Қалдық түрі</th><th class="n">Бір адамға, жылына</th><th class="n">Бағасы</th><th class="n">Болжамды түсім</th></tr></thead><tbody id="wT"></tbody><tfoot><tr><td>Барлығы</td><td class="n">50 кг</td><td class="n">—</td><td class="n">3 520 000 000 ₸</td></tr></tfoot></table>
+<p class="note" style="padding:0 18px 16px">Мысалы, пластик: 2 200 000 × 15 × 40 = 1 320 000 000 ₸. Бұл — таза пайда емес: жинау, тасымалдау, сұрыптау шығындары шегерілуі тиіс.</p></div>
+<div class="tbl"><h3>1 кг қалдықты қабылдау бағасы</h3>
+<table class="stack"><thead><tr><th>Қалдық түрі</th><th class="n">Орташа баға</th><th>Түсініктеме</th></tr></thead><tbody id="pT"></tbody></table></div>
+</div>
+
+<div class="two" style="margin-top:22px">
+<div class="chartbox"><h3>10 жылдық даму болжамы</h3><p class="note" style="margin:0">Тₙ = Т₀ × (1 + 0,10)ⁿ⁻¹, Т₀ = 3,52 млрд ₸</p>
+<div class="fig" id="fg1"><svg id="ch1" role="img" aria-label="10 жылдық табыс пен көгалдандыру болжамы"></svg></div>
+<div class="legend"><span><i style="background:#d6a841"></i>Жылдық табыс, млрд ₸</span><span><i style="background:#2f9e6e;border-radius:50%"></i>Көгалдандыру деңгейі, %</span></div></div>
+<div class="chartbox"><h3>2026–2030 жылдардағы өзгеріс</h3><p class="note" style="margin:0">Шартты көрсеткіш, жоба слайды бойынша</p>
+<div class="fig" id="fg2"><svg id="ch2" role="img" aria-label="Табиғат, қалдық және қаражат көрсеткіштері"></svg></div>
+<div class="legend"><span><i style="background:#3fae6a"></i>Табиғат</span><span><i style="background:#1f5c55"></i>Қалдық</span><span><i style="background:#d6c34f"></i>Қаражат</span></div></div>
+</div>
+
+<div class="tbl" style="margin-top:22px"><h3>10 жылдағы жинақталған табыс</h3>
+<div class="scroll"><table><thead><tr><th>Жыл</th><th class="n">Мектеп табысы</th><th class="n">Алматы мектептері бойынша</th><th class="n">Сұрыптау деңгейі</th><th class="n">Жылдық табыс (Алматы, 10% өсім)</th><th class="n">Көгалдандыру</th></tr></thead><tbody id="yT"></tbody></table></div>
+<p class="note" style="padding:0 18px 16px">Бұл — нақты кепілдендірілген табыс емес, бастапқы болжамдарға негізделген математикалық сценарий. Көгалдандыру мәндері — авторлық жоспарлық межелер.</p></div>
+<div class="flow"><span>Қоқыс азаяды</span><em>→</em><span>Ресурс ақша әкеледі</span><em>→</em><span>Ақша қалаға салынады</span><em>→</em><span>Қала жасыл әрі заманауи болады</span></div>
+</div></section>
+
+<section class="band dark" id="ai"><div class="wrap">
+<div class="two">
+<div>
+<span class="kicker">Жасанды интеллект</span>
+<h2>Мыңдаған затты секунд ішінде танитын сұрыптау</h2>
+<p>ЖИ жүйелері камералар, оптикалық датчиктер, сенсорлар және механикалық құрылғылар арқылы қалдықты түріне қарай танып, автоматты сұрыптайды.</p>
+<div class="cards" id="aiAdv" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))"></div>
+</div>
+<div class="tbl"><h3>Қоқыс сұрыптау аппараттары</h3>
+<table class="stack"><thead><tr><th>Түрі</th><th class="n">Бағасы</th><th>Жұмыс көлемі</th><th>Қайда</th></tr></thead><tbody id="aT"></tbody></table>
+<p class="note" style="padding:0 18px 16px">Бағалар — жобалық бағдар. Сатып алу алдында өндірушілердің коммерциялық ұсыныстары қажет.</p></div>
+</div>
+</div></section>
+
+<section class="band" id="platform"><div class="wrap">
+<span class="kicker">Авторлық цифрлық өнім</span>
+<h2>3D SMART CITY платформасының 7 бөлімі</h2>
+<p class="lead">Платформа болашақ қаланы тек сипаттап қоймай, оны үшөлшемді кеңістікте көрсетуге, ғимараттарды орналастыруға, материал таңдауға және тиімділікті есептеуге арналған. Платформа: <a href="https://eco-smart-beybitshilik.vercel.app" style="color:var(--gold);font-weight:700">eco-smart-beybitshilik.vercel.app</a></p>
+<div class="plat" id="plat"></div>
+<div class="shots">
+<figure class="ph" style="margin:0"><img src="img/shot-hero.jpg" alt="Платформаның басты беті" loading="lazy"><figcaption>Платформаның басты беті</figcaption></figure>
+<figure class="ph" style="margin:0"><img src="img/shot-3d.jpg" alt="Платформадағы 3D қала" loading="lazy"><figcaption>3D қала бөлімі</figcaption></figure>
+<figure class="ph" style="margin:0"><img src="img/shot-mat.jpg" alt="Материалдар бөлімі" loading="lazy"><figcaption>Материалдар бөлімі</figcaption></figure>
+</div>
+</div></section>
+
+<section class="band deeper" id="practice"><div class="wrap">
+<span class="kicker">Тәжірибелік жұмыс</span>
+<h2>Идеядан — нақты іске</h2>
+<p class="lead">Жоба аясында оқушылар макулатура жинап, Kagazy Recycling қайта өңдеу кәсіпорнына тапсырды, мектеп аумағын тазалап, гүлзарларға гүл отырғызды.</p>
+<div class="gal" id="gal"></div>
+<div class="vids" style="grid-template-columns:minmax(0,1fr)">
+<div><video controls preload="none" poster="img/kog-poster.jpg" playsinline><source src="media/kogaldandyru.mp4" type="video/mp4"></video><h3>Көгалдандыру акциясы: мектеп ауласына гүл отырғызу</h3></div>
+</div>
+</div></section>
+
+<section class="band" id="results"><div class="wrap">
+<div class="two">
+<div>
+<span class="kicker">Зерттеу нәтижелері</span>
+<h2>Не қол жеткізілді</h2>
+<ol class="tasks" id="res"></ol>
+</div>
+<div>
+<span class="kicker">Қорытынды</span>
+<h2>Экология мен экономика — одақтас</h2>
+<p>Жұмыстың басты ерекшелігі — экологиялық мәселеге тек табиғатты қорғау тұрғысынан емес, экономикалық және технологиялық мүмкіндік ретінде қарау. Дұрыс сұрыпталған қалдық — жай қоқыс емес, қайта пайдалануға болатын құнды ресурс.</p>
+<p>Болашақтың нағыз ақылды қаласы биік ғимараттарымен ғана өлшенбейді. Оның басты көрсеткіші — тұрғындардың денсаулығы, табиғаттың тазалығы, ресурстардың үнемделуі және қоғамның экологиялық мәдениеті.</p>
+<p style="color:var(--muted)">Жобаны мектептерден бастап тұрғын аудандар мен қоғамдық кеңістіктерге дейін кезең-кезеңімен енгізуге болады: алдымен сұрыптау мәдениеті, содан кейін шағын эко-жобалар, ақылды технологияларды сынау және тиімділігін бағалау.</p>
+<blockquote>Қоқысты ресурсқа айналдырайық, технологияны табиғатқа қызмет еткізейік, болашақты бірге жасайық!</blockquote>
+</div>
+</div>
+</div></section>
+
+<section class="band dark" id="refs"><div class="wrap">
+<span class="kicker">Пайдаланылған әдебиеттер</span>
+<h2>Ғылыми негіз</h2>
+<ol class="refs" id="refList"></ol>
+</div></section>
+<div class="orn" style="background-color:#082a1f"></div>
+<footer><div class="wrap">
+<div><b>«ЭКО SMART бейбітшілік қала»</b><br>Ғылыми жоба · 2026 жыл</div>
+<div>Орындаған: <b>Утаргалиев Бекарыс Аскарұлы</b>, 9 «Ә» сынып<br>№169 мектеп-лицейі, Алматы қ., Алатау ауданы</div>
+<div>Жетекші: <b>Турлашева Алина Маратовна</b><br>биология пәнінің мұғалімі</div>
+</div></footer>
+
+<div id="lb" role="dialog" aria-modal="true" aria-label="Фото"><button id="lbX" aria-label="Жабу">×</button><img id="lbI" alt=""></div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+{
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const fmt=n=>Math.round(n).toLocaleString('ru-RU').replace(/,/g,' ');
+const tasks=['Алматы қаласының қазіргі экологиялық жағдайын зерттеп, ластану себептерін анықтау.','Ауа, су және топырақ тазалығын сақтауға бағытталған тиімді ұсыныстар әзірлеу.','Ағаштар мен гүлдер отырғызу арқылы көгалдандыру жұмыстарын дамыту.','Тұрмыстық қалдықтарды сұрыптау, қайта өңдеу және қайта пайдалану жүйесін жетілдіру.','Smart-технологиялар мен ақылды үйлерді енгізу жолдарын ұсыну.','Экологиялық таза көлікті және энергия үнемдейтін технологияларды дамыту.','Ақылды аялдамалар мен роботтандырылған жүйелер арқылы қала тазалығын қамтамасыз ету.','Жаңартылатын энергия көздерін және ресурстарды тиімді пайдалануды насихаттау.','Тұрғындардың экологиялық сауаттылығы мен жауапкершілігін арттыру.','Алматыны таза, жасыл, қауіпсіз ЭКО SMART қала ретінде дамытуға үлес қосу.'];
+$('#tasks').innerHTML=tasks.map(t=>`<li><span>${t}</span></li>`).join('');
+const res=['Алматының негізгі экологиялық мәселелері жүйеленді.','Қалдықтарды сұрыптау мен қайта өңдеудің экономикалық мүмкіндіктері есептелді.','№169 мектеп-лицейі үшін жылына 96,8 тонна қағаз жинау моделі ұсынылды.','Мектептің жылдық болжамды түсімі — 3 872 000 теңге.','Алматы мектептеріне арналған кеңейтілген экономикалық модель жасалды.','ЖИ арқылы қалдықтарды автоматты сұрыптау технологиялары ұсынылды.','Қаланың экологиялық және интеллектуалды инфрақұрылымының авторлық үлгісі әзірленді.','3D SMART CITY платформасының құрылымы мен мүмкіндіктері көрсетілді.','Жобаның экономикалық, экологиялық және әлеуметтік маңызы анықталды.','Ұлттық сәулет өнерін заманауи эко-технологиялармен біріктіру ұсынылды.'];
+$('#res').innerHTML=res.map(t=>`<li><span>${t}</span></li>`).join('');
+
+/* tabs (abstract) */
+$$('[data-p]').forEach(()=>{});
+$$('.tab[data-l]').forEach(b=>b.addEventListener('click',()=>{$$('.tab[data-l]').forEach(x=>x.setAttribute('aria-selected',x===b));$$('[data-p]').forEach(p=>p.hidden=p.dataset.p!==b.dataset.l)}));
+
+/* solutions */
+const sol=[['s-uy','Ақылды үй және жер сілкінісінен қорғау',['Автоматты жарық, жылыту, ауаны тазарту','Сейсмодатчиктер, өрт дабылы, эвакуация хабарламасы','Төтенше жағдайда тұрғындарға хабар жіберу']],
+['s-osimdik','Көгалдандыру және SMART өсімдіктер',['Ағаш, гүл, бұта — шаң мен зиянды газды сіңіреді','Қала климатына төзімді өсімдіктер, тік бақтар','Роботтар мен автоматты суару жүйесі']],
+['s-sortirovka','Қоқысты сұрыптау және қайта өңдеу',['Органикалық, пластик, қағаз контейнерлері','Қайта өңдеу: пластик түйіршігінен жаңа бұйым','Қалдық — қала үшін ресурс']],
+['s-aialdama','SMART аялдама',['Жарық, жылу, құрылғыны зарядтау','QR-код арқылы электронды кітаптар','Күн панелі мен сұрыптау автоматы']],
+['s-kozgalys','SMART қозғалыс және эко-көлік',['Сутекпен жүретін көлік — ауаны ластамайды','Пьезоэлектрлік едендер: қадамнан энергия','Жел мен күн электр станциялары']],
+['s-su','Су құбырлары және су апатын бақылау',['Жер асты құбырлары арқылы суды жинау','Резервуарлар мен су тазарту сүзгілері','Жылыжай мен көшені үнемді суару']]];
+$('#sol').innerHTML=sol.map(([i,h,l])=>`<article class="card reveal"><figure class="ph" style="margin:0"><img src="img/${i}.jpg" alt="${h}" loading="lazy"></figure><div class="tx"><h3>${h}</h3><ul>${l.map(x=>`<li>${x}</li>`).join('')}</ul></div></article>`).join('');
+
+const maps=[['map1','Жоба картасы: аудан жоспары'],['map2','Тарихи орындар мен ескерткіштер'],['map3','Саябақтар мен саяжайлар'],['map4','Сауда үйлері, кинотеатр, мейрамханалар'],['map5','Тұрғын үйлер'],['map6','Білім мекемелері мен спорт алаңдары'],['map7','Қалдық қабылдайтын және өңдейтін орындар']];
+$('#maps').innerHTML=maps.map(([i,c])=>`<figure class="ph reveal" style="margin:0"><img src="img/${i}.jpg" alt="${c}" loading="lazy"><figcaption>${c}</figcaption></figure>`).join('');
+
+/* economy */
+const pre=[{p:2420,k:40,r:40,n:'Оқушы 2240 + мұғалім 180 = 2420 адам. Әр адам тоқсанына 10 кг → жылына 40 кг.'},{p:698000,k:40,r:40,n:'349 мектеп × орта есеппен 2000 адам = 698 000 адам.'}];
+const calc=()=>{const p=+$('#cP').value||0,k=+$('#cK').value||0,r=+$('#cR').value||0,t=p*k*r,kg=p*k;
+$('#cOut').textContent=fmt(t)+' ₸';$('#cKg').textContent=(kg>=1000?(kg/1000).toLocaleString('ru-RU',{maximumFractionDigits:1})+' т':fmt(kg)+' кг');$('#cOne').textContent=fmt(k*r)+' ₸';$('#c10').textContent=fmt(t*10)+' ₸'};
+['#cP','#cK','#cR'].forEach(s=>$(s).addEventListener('input',calc));
+$$('.tab[data-pre]').forEach(b=>b.addEventListener('click',()=>{$$('.tab[data-pre]').forEach(x=>x.setAttribute('aria-selected',x===b));const d=pre[b.dataset.pre];$('#cP').value=d.p;$('#cK').value=d.k;$('#cR').value=d.r;$('#cNote').textContent=d.n;calc()}));
+calc();
+const wt=[['Пластик',15,40],['Алюминий',5,100],['Шыны',20,5],['Қағаз',10,40]];
+$('#wT').innerHTML=wt.map(([n,k,r])=>`<tr><td>${n}</td><td class="n">${k} кг</td><td class="n">${r} ₸/кг</td><td class="n">${fmt(2200000*k*r)} ₸</td></tr>`).join('');
+const pt=[['Макулатура (қағаз)','40–70 ₸','Кітап, газет, офис қағазы'],['Картон','35–50 ₸','Қораптар'],['Пластик','40–140 ₸','Түріне байланысты'],['Металл','100–140 ₸','Ең тиімді түрі'],['Шыны','5–12 ₸','Ең арзан материал']];
+$('#pT').innerHTML=pt.map(r=>`<tr><td>${r[0]}</td><td class="n">${r[1]}</td><td>${r[2]}</td></tr>`).join('');
+const yr=[...Array(10)].map((_,i)=>({y:i+1,inc:+(3.52*1.1**i).toFixed(2),lvl:[100,110,121,133,146,161,177,195,214,235][i],g:[10,18,27,36,46,56,65,74,83,92][i]}));
+$('#yT').innerHTML=yr.map(d=>`<tr><td>${d.y}-жыл</td><td class="n">${fmt(3872000*d.y)} ₸</td><td class="n">${fmt(1116800000*d.y)} ₸</td><td class="n">${d.lvl}%</td><td class="n">${d.inc.toFixed(2).replace('.',',')} млрд ₸</td><td class="n">${d.g}%</td></tr>`).join('');
+const ai=[['Шағын SMART жәшік','1–3 млн ₸','Күніне 10–50 кг','Мектеп, кеңсе'],['Орташа ЖИ аппараты','25–150 млн ₸','Күніне 1–10 т','Сұрыптау кәсіпорны'],['Үлкен өндірістік жүйе','250 млн – 1 млрд+ ₸','Күніне 50–200+ т','Қалалық сұрыптау орталығы']];
+$('#aT').innerHTML=ai.map(r=>`<tr><td><b>${r[0]}</b></td><td class="n">${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('');
+$('#aiAdv').innerHTML=['Қалдықты түріне қарай таниды','Сұрыптауды автоматтандырады','Адам еңбегін жеңілдетеді','Қайта өңдеуге жарамдыны бөледі','Қалдық қозғалысын есепке алады','Сұрыптау сапасын бақылайды'].map(t=>`<div class="card" style="padding:14px 16px;font-weight:600">${t}</div>`).join('');
+
+const plat=[['Идея','Болашақ қаланың миссиясы, мақсаттары, қағидаттары мен даму кезеңдері: жаңартылатын энергия, су үнемдеу, қалдықты қайта өңдеу.'],['3D қала','Қаланың үшөлшемді моделі: ғимараттар, көшелер, саябақтар, велосипед жолдары, аялдамалар. Нысанды таңдап, қызметін көруге болады.'],['Ғимараттар','Ақылды үйлер, мектептер, балабақшалар, ауруханалар, сауда және спорт кешендері — сыртқы көрінісі, қабат саны, ауданы.'],['Материалдар','Бетон, кірпіш, ағаш, шыны, қайта өңделген пластик: бағасы, беріктігі, жылу өткізгіштігі, экологиялық ерекшелігі.'],['Есептеу','Құрылыс құны, энергия шығыны, қалдық көлемі және экономикалық көрсеткіштер кесте мен диаграммада автоматты есептеледі.'],['Пайдасы','Экологиялық, әлеуметтік және экономикалық артықшылықтар нақты көрсеткіштермен және инфографикамен.'],['Жұмыспен қамту','Сәулетші, инженер, бағдарламашы, робототехник, эколог, қайта өңдеу маманы — жаңа жұмыс орындарының бағыттары.']];
+$('#plat').innerHTML=plat.map(([h,p])=>`<div class="card reveal"><h3>${h} бөлімі</h3><p style="margin:0;color:var(--muted)">${p}</p></div>`).join('');
+
+const gal=[['team','Kagazy Recycling кәсіпорнында: жоба тобы маманмен бірге','w2 h2'],['kagazy','Kagazy Recycling қайта өңдеу кәсіпорны','h2'],['kagazy-bag','Жиналған макулатураны тапсыру',''],['plant','Гүлзарға гүл отырғызу',''],['scale','Макулатураны таразыға өлшеу','h2'],['carton','Сыныпта картонды сұрыптау','w2'],['plants-class','Мектеп дәлізіндегі жасыл өсімдіктер','h2'],['sweep','Мектеп аумағын тазалау','w2']];
+$('#gal').innerHTML=gal.map(([i,c,k])=>`<figure class="ph ${k}" style="margin:0"><img src="img/${i}.jpg" alt="${c}" loading="lazy"><figcaption>${c}</figcaption></figure>`).join('');
+
+const refs=['Fellini S., Marro M., Del Ponte A. V., Barulli M., Soulhac L., Ridolfi L., Salizzoni P. (2022). High-resolution wind-tunnel investigation about the effect of street trees on pollutant concentration and street canyon ventilation. arXiv.','Pinto D. M., Russo D. D., Sudoso A. M. (2025). Optimal Placement of Nature-Based Solutions for Urban Challenges. arXiv.','Zúñiga-González A. C., Madhavapeddy A., Bardhan R. (2025). Airborne assessment uncovers socioeconomic stratification of urban nature in England. arXiv.','The Institution of Environmental Sciences. Role of trees & other green infrastructure in urban air quality. the-ies.org','Қазақстан Республикасы. Экологиялық мәдениетті дамытудың 2024–2029 жылдарға арналған «Таза Қазақстан» тұжырымдамасы. «Әділет» АҚЖ.','Қазақстан Республикасының экологиялық қауіпсіздігі тұжырымдамасы (2004–2015). «Әділет» АҚЖ.','Мырзағалиев М. «Қалдықтарды қайта өңдеу үлесін арттыру және экологиялық бастамаларды ілгерілету». ҚР Премьер-министрінің ресми сайты.','Балаубай Б. «Экологиялық жағдайды жақсартатын жоба». «Ана тілі» газеті.','Құлжабаева Г. «Жемқорлықпен шындап күресетін ел ғана экологиялық проблемасын шешуді дұрыс жолға қоя алады». Alash.kz.','Данилевский А. С. «Экология» (қазақстандық нұсқа). biblio.rii.kz'];
+$('#refList').innerHTML=refs.map(r=>`<li>${r}</li>`).join('');
+
+/* lightbox */
+const lb=$('#lb');document.addEventListener('click',e=>{const f=e.target.closest('figure.ph');if(f){const im=f.querySelector('img');$('#lbI').src=im.src;$('#lbI').alt=im.alt;lb.classList.add('on');$('#lbX').focus()}});
+const closeLb=()=>lb.classList.remove('on');$('#lbX').addEventListener('click',closeLb);lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
+
+/* reveal + hero tilt */
+const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+$$('.reveal').forEach(el=>rm?el.classList.add('in'):io.observe(el));
+const fr=$('#frame');if(!rm){fr.parentElement.addEventListener('pointermove',e=>{const r=fr.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;fr.style.transform=`rotateY(${x*16}deg) rotateX(${-y*12}deg)`});fr.parentElement.addEventListener('pointerleave',()=>fr.style.transform='')}
+
+/* charts */
+const svgEl=(s,html)=>{s.innerHTML=html};
+const ch1=$('#ch1'),draw1=()=>{const W=ch1.clientWidth,H=ch1.clientHeight,l=W<520?30:42,r=W<520?30:42,t=16,b=30,iw=W-l-r,ih=H-t-b,bw=iw/10;let h='';
+for(let v=0;v<=9;v+=3){const y=t+ih-v/9*ih;h+=`<line x1="${l}" x2="${W-r}" y1="${y}" y2="${y}" stroke="currentColor" opacity=".12"/><text x="${l-6}" y="${y+4}" text-anchor="end" font-size="12" fill="currentColor" opacity=".7">${v}</text>`}
+yr.forEach((d,i)=>{const bh=d.inc/9*ih,x=l+i*bw+bw*.18;h+=`<rect x="${x}" y="${t+ih-bh}" width="${bw*.64}" height="${bh}" rx="4" fill="#d6a841"/>`;if(W>=520||i%3===0||i===9)h+=`<text x="${x+bw*.32}" y="${t+ih-bh-5}" text-anchor="middle" font-size="11.5" font-weight="700" fill="currentColor">${d.inc.toFixed(1).replace('.',',')}</text>`;h+=`<text x="${x+bw*.32}" y="${H-10}" text-anchor="middle" font-size="12" fill="currentColor" opacity=".7">${d.y}</text>`});
+const pts=yr.map((d,i)=>[l+i*bw+bw/2,t+ih-d.g/100*ih]);h+=`<polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#2f9e6e" stroke-width="3"/>`+pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="4.5" fill="#2f9e6e" stroke="#fff" stroke-width="1.5"/>`).join('');
+h+=`<text x="${W-r+6}" y="${t+4}" font-size="12" fill="#2f9e6e">100%</text><text x="${W-r+6}" y="${t+ih+4}" font-size="12" fill="#2f9e6e">0%</text>`;svgEl(ch1,h)};
+const ch2=$('#ch2'),g2=[['2026',1.8,4.5,.5],['2027–28',2.5,3.4,2.4],['2029',3.5,1.8,3.3],['2030',5.5,.8,5.5]],cols=['#3fae6a','#1f5c55','#d6c34f'],draw2=()=>{const W=ch2.clientWidth,H=ch2.clientHeight,l=26,t=14,b=30,iw=W-l-10,ih=H-t-b,gw=iw/4;let h='';
+for(let v=0;v<=6;v+=2){const y=t+ih-v/6*ih;h+=`<line x1="${l}" x2="${W-10}" y1="${y}" y2="${y}" stroke="currentColor" opacity=".12"/><text x="${l-6}" y="${y+4}" text-anchor="end" font-size="12" fill="currentColor" opacity=".7">${v}</text>`}
+g2.forEach((g,i)=>{const bw=gw*.22;[1,2,3].forEach(k=>{const bh=g[k]/6*ih,x=l+i*gw+gw*.14+(k-1)*(bw+3);h+=`<rect x="${x}" y="${t+ih-bh}" width="${bw}" height="${bh}" rx="3" fill="${cols[k-1]}"/>`});h+=`<text x="${l+i*gw+gw/2}" y="${H-10}" text-anchor="middle" font-size="12" fill="currentColor" opacity=".75">${g[0]}</text>`});svgEl(ch2,h)};
+const ro1=new ResizeObserver(draw1);ro1.observe(ch1);const ro2=new ResizeObserver(draw2);ro2.observe(ch2);
+
+/* ===== 3D CITY ===== */
+const B=[
+{id:'shanyrak',n:'«Шаңырақ» орталығы',p:'Қаланы басқару және мәдени орталық. Жарық, жылу, су және қауіпсіздік жүйелері осы жерден бақыланады. Киіз үйдің шаңырағы — бірлік пен бейбітшіліктің белгісі.'},
+{id:'tumar',n:'«Тұмар» мұнарасы',p:'Ақылды тұрғын мұнара: автоматты жарықтандыру, жылыту, ауаны тазарту. Сейсмодатчиктер мен өрт дабылы тұрғындарды уақытында ескертеді. Тұмар — қорғаныш символы.'},
+{id:'besik',n:'«Бесік» балабақшасы',p:'Табиғи жарығы мол, ауасы таза, қауіпсіз балабақша. Шатырында жасыл бақ, ауласында ойын алаңы. Бесік — ұрпақ тәрбиесінің бастауы.'},
+{id:'dombyra',n:'«Домбыра» хабы',p:'Мәдениет және цифрлық білім хабы: QR-код арқылы электронды кітапхана, шеберханалар, концерт залы. Ұлттық аспаптың пішіні — өнер мен технологияның одағы.'},
+{id:'taiqazan',n:'«Тайқазан» эко базары',p:'Жергілікті фермерлердің органикалық өнімдері сатылатын базар. Органикалық қалдық компостқа айналып, қаланың гүлзарларына қайтады. Тайқазан — береке мен ынтымақтың символы.'},
+{id:'zauyt',n:'«Қайта түлеу» зауыты',p:'ЖИ арқылы қалдықты сұрыптайтын зауыт: қағаз, пластик, шыны, металл бөлек жиналып, қайта өңделеді. Шатырындағы күн панельдері зауытты энергиямен қамтиды.'},
+{id:'samal',n:'«Самал» жел-күн паркі',p:'Жел генераторлары мен күн панельдері — қаланың таза энергия көзі. Атмосфераға шығарындыны азайтып, қаланың энергия шығынын үнемдейді.'},
+{id:'stop',n:'SMART аялдама',p:'Жарық, жылу, құрылғыны зарядтау; QR-код арқылы кітап оқу; пьезоэлектрлік еден адам қадамын энергияға айналдырады. Қасында қалдық сұрыптау автоматы бар.'},
+{id:'homes',n:'Ақылды эко-үйлер',p:'Жасыл шатырлы, ою-өрнек белдеуі бар тұрғын үйлер: энергия үнемдейтін терезелер, жаңбыр суын жинау, автоматты суару.'}];
+$('#blist').innerHTML=B.map(b=>`<button data-b="${b.id}">${b.n}</button>`).join('');
+const info=(b)=>{$('#infoH').textContent=b.n;$('#infoP').textContent=b.p;$('#info').hidden=false};
+$('#infoX').addEventListener('click',()=>{$('#info').hidden=true;sel(null)});
+let sel=()=>{};
+$$('#blist button').forEach(x=>x.addEventListener('click',()=>{const b=B.find(v=>v.id===x.dataset.b);info(b);sel(b.id);$('#city').scrollIntoView({behavior:rm?'auto':'smooth',block:'center'})}));
+
+const box=$('#city');
+let ok=false;try{ok=!!window.THREE&&!!document.createElement('canvas').getContext('webgl')}catch(e){}
+if(!ok){$('#noGL').hidden=false}else{
+const T=THREE;
+const R=new T.WebGLRenderer({antialias:true});R.setPixelRatio(Math.min(devicePixelRatio,2));R.shadowMap.enabled=true;R.shadowMap.type=T.PCFSoftShadowMap;box.prepend(R.domElement);
+const S=new T.Scene();const day=new T.Color('#bfe3ee'),night=new T.Color('#0b1a2e');S.background=day.clone();S.fog=new T.Fog(day.clone(),90,170);
+const C=new T.PerspectiveCamera(42,1,.5,400);const home=new T.Vector3(46,40,52);C.position.copy(home);
+const O=new T.OrbitControls(C,R.domElement);O.target.set(0,3,0);O.enableDamping=true;O.maxPolarAngle=1.42;O.minDistance=18;O.maxDistance=120;O.autoRotate=!rm;O.autoRotateSpeed=.7;
+const hemi=new T.HemisphereLight('#ffffff','#5f8f5a',.75);S.add(hemi);
+const sun=new T.DirectionalLight('#fff4dc',1.05);sun.position.set(40,60,25);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-50,right:50,top:50,bottom:-50,far:160});S.add(sun);
+const M=(c,o={})=>new T.MeshStandardMaterial(Object.assign({color:c,roughness:.7,metalness:.05},o));
+const gold=M('#d6a841',{metalness:.55,roughness:.35}),white=M('#f6f3ea'),glass=M('#5fb7c4',{metalness:.3,roughness:.15,emissive:'#ffcf70',emissiveIntensity:0}),dark=M('#36423d'),green=M('#4fae5c'),wood=M('#b07a3c',{roughness:.55});
+const winMats=[glass];const winM=()=>{const m=M('#9fd6de',{emissive:'#ffd27a',emissiveIntensity:0});winMats.push(m);return m};
+const mesh=(g,m,x=0,y=0,z=0,cast=true)=>{const o=new T.Mesh(g,m);o.position.set(x,y,z);o.castShadow=cast;o.receiveShadow=true;return o};
+// ground
+const ground=mesh(new T.CircleGeometry(90,64),M('#8fcf7a'),0,0,0,false);ground.rotation.x=-Math.PI/2;S.add(ground);
+const ring=mesh(new T.RingGeometry(19,23,96),M('#59625e',{roughness:.9}),0,.03,0,false);ring.rotation.x=-Math.PI/2;S.add(ring);
+const dash=mesh(new T.RingGeometry(20.9,21.1,96),M('#f3e7b5'),0,.05,0,false);dash.rotation.x=-Math.PI/2;S.add(dash);
+const walk=mesh(new T.RingGeometry(23,24,96),M('#e7dcc0'),0,.04,0,false);walk.rotation.x=-Math.PI/2;S.add(walk);
+const plaza=mesh(new T.CircleGeometry(8,64),M('#efe6cf'),0,.04,0,false);plaza.rotation.x=-Math.PI/2;S.add(plaza);
+// radial paths
+for(let i=0;i<4;i++){const p=mesh(new T.PlaneGeometry(2.2,11),M('#e7dcc0'),0,.035,0,false);p.rotation.x=-Math.PI/2;p.rotation.z=i*Math.PI/2;p.position.set(Math.sin(i*Math.PI/2)*13.5,.035,Math.cos(i*Math.PI/2)*13.5);S.add(p)}
+// fountain + ornament ring
+const fount=new T.Group();fount.add(mesh(new T.CylinderGeometry(4,4.3,.7,48),white,0,.35,0));const water=mesh(new T.CylinderGeometry(3.6,3.6,.2,48),M('#57b9e0',{metalness:.2,roughness:.1,transparent:true,opacity:.85}),0,.72,0,false);fount.add(water);
+fount.add(mesh(new T.CylinderGeometry(.25,.35,4.5,16),gold,0,2.6,0));const sh=mesh(new T.TorusGeometry(1.4,.12,10,40),gold,0,5,0);sh.rotation.x=Math.PI/2;fount.add(sh);
+for(let i=0;i<4;i++){const s=mesh(new T.BoxGeometry(2.8,.1,.1),gold,0,5,0);s.rotation.y=i*Math.PI/4;fount.add(s)}
+S.add(fount);
+// mountains
+const mt=[[-60,-55,22,26],[-30,-70,26,32],[5,-75,24,36],[38,-68,26,30],[66,-50,20,24],[-80,-25,16,18]];
+mt.forEach(([x,z,r,h])=>{S.add(mesh(new T.ConeGeometry(r,h,7),M('#8a9aa5',{flatShading:true}),x,h/2-.5,z,false));S.add(mesh(new T.ConeGeometry(r*.38,h*.38,7),M('#ffffff',{flatShading:true}),x,h-h*.19-.4,z,false))});
+// trees (instanced)
+const tc=170,crown=new T.InstancedMesh(new T.ConeGeometry(1,2.6,7),M('#2f8f4e',{flatShading:true}),tc),trunk=new T.InstancedMesh(new T.CylinderGeometry(.15,.2,1,6),wood,tc);crown.castShadow=true;
+const dm=new T.Object3D();let k=0,seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+const spots=[];
+// buildings
+const G={};const place=(id,g,x,z,ry=0,rad=6)=>{g.position.set(x,0,z);g.rotation.y=ry;g.userData.id=id;g.traverse(o=>{if(o.isMesh)o.userData.id=id});S.add(g);G[id]=g;spots.push([x,z,rad])};
+const ang=(d,r)=>[Math.cos(d*Math.PI/180)*r,Math.sin(d*Math.PI/180)*r];
+{// shanyrak (yurt)
+const g=new T.Group();g.add(mesh(new T.CylinderGeometry(4.2,4.2,3,40),white,0,1.5,0));const band=mesh(new T.CylinderGeometry(4.25,4.25,.5,40),M('#b4232c'),0,2.4,0);g.add(band);
+for(let i=0;i<10;i++){const w=mesh(new T.BoxGeometry(.9,1.4,.1),winM(),0,1.3,0);const a=i/10*Math.PI*2;w.position.set(Math.cos(a)*4.22,1.3,Math.sin(a)*4.22);w.rotation.y=-a+Math.PI/2;g.add(w)}
+g.add(mesh(new T.ConeGeometry(4.6,3.2,40,1,true),M('#f1e5c6',{side:T.DoubleSide}),0,4.6,0));const top=mesh(new T.TorusGeometry(.9,.18,10,32),gold,0,6.1,0);top.rotation.x=Math.PI/2;g.add(top);
+for(let i=0;i<3;i++){const s=mesh(new T.BoxGeometry(1.9,.12,.12),gold,0,6.15,0);s.rotation.y=i*Math.PI/3;g.add(s)}
+for(let i=0;i<16;i++){const a=i/16*Math.PI*2,u=mesh(new T.BoxGeometry(.08,.08,3.6),gold,0,0,0);u.position.set(Math.cos(a)*2.7,4.65,Math.sin(a)*2.7);u.lookAt(0,6.1,0);g.add(u)}
+const[x,z]=ang(-60,13);place('shanyrak',g,x,z,0,6)}
+{// tumar tower
+const g=new T.Group();const body=mesh(new T.CylinderGeometry(2.6,2.6,18,3),glass,0,9,0);g.add(body);
+for(let y=1.5;y<18;y+=1.5){const b=mesh(new T.CylinderGeometry(2.72,2.72,.22,3),gold,0,y,0);g.add(b)}
+g.add(mesh(new T.ConeGeometry(2.7,3.6,3),gold,0,19.8,0));g.add(mesh(new T.SphereGeometry(.45,16,12),M('#2fb7a0',{emissive:'#2fb7a0',emissiveIntensity:.4}),0,22,0));
+const[x,z]=ang(-20,12.5);place('tumar',g,x,z,.4,5)}
+{// besik kindergarten
+const g=new T.Group();g.add(mesh(new T.BoxGeometry(9,1,5),white,0,.5,0));const arc=mesh(new T.CylinderGeometry(2.6,2.6,8.4,32,1,false,0,Math.PI),M('#7fc8a9',{metalness:.2,roughness:.25}),0,1,0);arc.rotation.z=Math.PI/2;arc.rotation.y=0;g.add(arc);
+for(let i=-4;i<=4;i+=1.4){const rb=mesh(new T.TorusGeometry(2.62,.09,8,24,Math.PI),gold,i,1,0);rb.rotation.y=Math.PI/2;g.add(rb)}
+g.add(mesh(new T.BoxGeometry(1.4,1.6,.2),winM(),0,1.8,2.62));
+for(let i=0;i<3;i++)g.add(mesh(new T.SphereGeometry(.45,12,10),M(['#e94f37','#f6c90e','#3fa7d6'][i]),-3+i*3,.45,3.6));
+const[x,z]=ang(30,13);place('besik',g,x,z,-Math.PI/2+.5,6)}
+{// dombyra hub
+const g=new T.Group();const body=mesh(new T.SphereGeometry(1,32,24),wood,0,3,0);body.scale.set(2.6,3.4,1.5);g.add(body);
+const hole=mesh(new T.CircleGeometry(.6,24),M('#3b2412'),0,3.4,1.52);g.add(hole);
+g.add(mesh(new T.CylinderGeometry(.38,.5,8,12),M('#8b5a2b'),0,9.8,0));g.add(mesh(new T.BoxGeometry(1,1.4,.5),wood,0,14.3,0));
+for(let i=-1;i<=1;i+=2){const s=mesh(new T.CylinderGeometry(.03,.03,11,4),gold,i*.18,8.6,1.3);s.rotation.x=-.12;g.add(s)}
+for(let y=7;y<14;y+=1.1)g.add(mesh(new T.BoxGeometry(.85,.06,.06),gold,0,y,.42));
+for(let i=0;i<6;i++){const w=mesh(new T.BoxGeometry(.6,.8,.1),winM(),0,0,0);const a=i/6*Math.PI-Math.PI;w.position.set(Math.cos(a)*2.5,1.4,Math.sin(a)*1.4+.1);g.add(w)}
+g.add(mesh(new T.CylinderGeometry(3.2,3.4,.4,32),white,0,.2,0));
+const[x,z]=ang(80,12.5);place('dombyra',g,x,z,Math.PI,5)}
+{// taiqazan
+const g=new T.Group();const bowl=mesh(new T.SphereGeometry(3.6,40,20,0,Math.PI*2,Math.PI/2,Math.PI/2),M('#a8742e',{metalness:.7,roughness:.35,side:T.DoubleSide}),0,3.8,0);g.add(bowl);
+const rim=mesh(new T.TorusGeometry(3.6,.28,12,48),gold,0,3.8,0);rim.rotation.x=Math.PI/2;g.add(rim);
+for(let i=0;i<4;i++){const a=i*Math.PI/2+Math.PI/4,h=mesh(new T.TorusGeometry(.7,.16,10,24),gold,Math.cos(a)*3.9,3.6,Math.sin(a)*3.9);h.rotation.y=-a;g.add(h)}
+for(let i=0;i<14;i++){const a=rnd()*6.28,r=rnd()*2.6;g.add(mesh(new T.SphereGeometry(.45+rnd()*.2,12,10),M(['#5dbb63','#e94f37','#f6c90e','#8fd16a'][i%4]),Math.cos(a)*r,3.7,Math.sin(a)*r))}
+for(let i=0;i<3;i++)g.add(mesh(new T.CylinderGeometry(.35,.45,.3,12),gold,Math.cos(i*2.1)*2,.15,Math.sin(i*2.1)*2));
+const[x,z]=ang(150,12.5);place('taiqazan',g,x,z,0,5)}
+{// factory (outside ring)
+const g=new T.Group();g.add(mesh(new T.BoxGeometry(10,4.5,6.5),white,0,2.25,0));
+for(let i=-4;i<=4;i+=2){const p=mesh(new T.BoxGeometry(1.7,.12,5.6),M('#1f4e8c',{metalness:.5,roughness:.3}),i,4.8,0);p.rotation.z=.3;g.add(p)}
+for(let i=0;i<4;i++)g.add(mesh(new T.BoxGeometry(1.8,1.6,.2),winM(),-3.6+i*2.4,2.6,3.26));
+g.add(mesh(new T.CylinderGeometry(.6,.8,9,16),white,3.6,4.5,-2.2));g.add(mesh(new T.CylinderGeometry(.7,.7,.8,16),green,3.6,9.2,-2.2));
+const bins=['#2e7dd7','#f6c90e','#3fae6a','#8a8f94'];bins.forEach((c,i)=>g.add(mesh(new T.BoxGeometry(1.1,1.3,1.1),M(c),-3.3+i*1.5,.65,4.6)));
+g.add(mesh(new T.BoxGeometry(10.2,.35,.15),gold,0,4.1,3.3));
+const[x,z]=ang(205,33);place('zauyt',g,x,z,-205*Math.PI/180+Math.PI/2,8)}
+// wind + solar park
+const blades=[];{const g=new T.Group();
+for(let i=0;i<3;i++){const tw=new T.Group();tw.position.set(i*5.5-5.5,0,i%2*3);tw.add(mesh(new T.CylinderGeometry(.18,.35,11,10),white,0,5.5,0));const hub=new T.Group();hub.position.set(0,11,.5);hub.add(mesh(new T.SphereGeometry(.4,12,10),white));for(let b=0;b<3;b++){const bl=mesh(new T.BoxGeometry(.35,4.6,.08),white,0,2.3,0);const p=new T.Group();p.rotation.z=b*Math.PI*2/3;p.add(bl);hub.add(p)}tw.add(hub);blades.push(hub);g.add(tw)}
+for(let r=0;r<2;r++)for(let c=0;c<5;c++){const p=mesh(new T.BoxGeometry(2,.1,1.3),M('#1f4e8c',{metalness:.55,roughness:.25}),c*2.3-4.6,1,7+r*2);p.rotation.x=-.5;g.add(p);g.add(mesh(new T.CylinderGeometry(.06,.06,1,6),dark,c*2.3-4.6,.5,7+r*2))}
+const[x,z]=ang(-100,36);place('samal',g,x,z,-(-100)*Math.PI/180-Math.PI/2,10)}
+{// smart stop
+const g=new T.Group();g.add(mesh(new T.BoxGeometry(4.5,.15,2),M('#1f4e8c',{metalness:.5,roughness:.3}),0,2.6,0));g.add(mesh(new T.BoxGeometry(4.5,.2,2),gold,0,2.45,0));
+[-2,2].forEach(x=>g.add(mesh(new T.BoxGeometry(.15,2.5,.15),dark,x,1.25,-.8)));g.add(mesh(new T.BoxGeometry(4.2,1.9,.08),M('#bfe8ee',{transparent:true,opacity:.5}),0,1.4,-.85));
+g.add(mesh(new T.BoxGeometry(2.6,.4,.6),wood,0,.45,-.4));g.add(mesh(new T.BoxGeometry(.7,1.6,.6),M('#3fae6a'),1.9,.8,.3));g.add(mesh(new T.BoxGeometry(4.6,.06,2.2),M('#f0cd7a',{emissive:'#f0cd7a',emissiveIntensity:.15}),0,.03,0));
+const[x,z]=ang(-150,25.5);place('stop',g,x,z,-(-150)*Math.PI/180+Math.PI/2,3)}
+{// homes cluster
+const g=new T.Group();[[-4,0,6],[0,-1,8],[4,.5,5],[-1,4,4.5],[3.5,4.5,6.5]].forEach(([x,z,h])=>{g.add(mesh(new T.BoxGeometry(3,h,3),white,x,h/2,z));g.add(mesh(new T.BoxGeometry(3.05,.35,3.05),gold,x,h*.66,z));g.add(mesh(new T.BoxGeometry(3.1,.5,3.1),green,x,h+.25,z));
+for(let y=1.2;y<h-.6;y+=1.4){g.add(mesh(new T.BoxGeometry(2.2,.7,.08),winM(),x,y,z+1.52))}});
+const[x,z]=ang(110,37);place('homes',g,x,z,-110*Math.PI/180-Math.PI/2,9)}
+// plant trees now that spots are reserved
+k=0;let guard=0;while(k<tc&&guard<5000){guard++;const a=rnd()*Math.PI*2,r=9+rnd()*48;const x=Math.cos(a)*r,z=Math.sin(a)*r;if(r>17.5&&r<25.5)continue;if(spots.some(s=>Math.hypot(s[0]-x,s[1]-z)<s[2]))continue;if(z<-48)continue;const sc=.6+rnd()*.8;dm.position.set(x,1.3*sc+.9*sc,z);dm.scale.set(sc,sc,sc);dm.rotation.set(0,0,0);dm.updateMatrix();crown.setMatrixAt(k,dm.matrix);dm.position.set(x,.5*sc,z);dm.updateMatrix();trunk.setMatrixAt(k,dm.matrix);k++}
+crown.count=trunk.count=k;S.add(crown,trunk);
+// lamps
+const lamps=[];for(let i=0;i<16;i++){const a=i/16*Math.PI*2,x=Math.cos(a)*24.4,z=Math.sin(a)*24.4;S.add(mesh(new T.CylinderGeometry(.07,.09,2.6,6),dark,x,1.3,z));const b=mesh(new T.SphereGeometry(.22,10,8),M('#fff3c4',{emissive:'#ffd27a',emissiveIntensity:.1}),x,2.7,z,false);lamps.push(b.material);S.add(b)}
+// cars (hydrogen buses)
+const cars=[];const cc=['#2fb7a0','#ffffff','#d6a841','#3fa7d6','#e94f37'];for(let i=0;i<7;i++){const g=new T.Group();g.add(mesh(new T.BoxGeometry(1.2,1,i%3===0?3.6:2),M(cc[i%5],{metalness:.4,roughness:.3}),0,.7,0));g.add(mesh(new T.BoxGeometry(1.22,.4,i%3===0?3.2:1.4),M('#1b3a4b',{metalness:.5,roughness:.1}),0,1.05,0));g.userData={a:i/7*Math.PI*2,r:i%2?20:22,s:(i%2?1:-1)*(.12+i*.01)};cars.push(g);S.add(g)}
+// labels
+const L={};B.forEach(b=>{const d=document.createElement('div');d.className='lbl';d.textContent=b.n;d.addEventListener('click',e=>{e.stopPropagation();info(b);sel(b.id)});box.appendChild(d);L[b.id]=d});
+const top=new T.Vector3(),bb=new T.Box3();const tops={};Object.entries(G).forEach(([id,g])=>{bb.setFromObject(g);tops[id]=new T.Vector3((bb.min.x+bb.max.x)/2,bb.max.y+.8,(bb.min.z+bb.max.z)/2)});
+let showL=true,cur=null;
+sel=id=>{cur=id;Object.entries(L).forEach(([k,d])=>d.classList.toggle('sel',k===id));if(id&&G[id]){O.autoRotate=false;$('#bRot').setAttribute('aria-pressed','false');const t=tops[id];goal={t:new T.Vector3(t.x,t.y*.4,t.z),c:new T.Vector3(t.x*1.6+12,t.y+14,t.z*1.6+12)}}};
+let goal=null;
+// picking
+const ray=new T.Raycaster(),mv=new T.Vector2();let down=null;
+R.domElement.addEventListener('pointerdown',e=>down=[e.clientX,e.clientY]);
+R.domElement.addEventListener('pointerup',e=>{if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>6)return;const r=R.domElement.getBoundingClientRect();mv.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(mv,C);const h=ray.intersectObjects(Object.values(G),true).find(x=>x.object.userData.id);if(h){const b=B.find(v=>v.id===h.object.userData.id);info(b);sel(b.id)}});
+R.domElement.addEventListener('pointermove',e=>{const r=R.domElement.getBoundingClientRect();mv.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(mv,C);R.domElement.style.cursor=ray.intersectObjects(Object.values(G),true).length?'pointer':'grab'});
+// controls
+let isNight=false;
+const setNight=n=>{isNight=n;$('#bNight').setAttribute('aria-pressed',n);$('#bNight').textContent=n?'Күн':'Түн';S.background.copy(n?night:day);S.fog.color.copy(n?night:day);hemi.intensity=n?.22:.75;sun.intensity=n?.18:1.05;sun.color.set(n?'#9fb4ff':'#fff4dc');winMats.forEach(m=>m.emissiveIntensity=n?(m===glass?.35:1.1):0);lamps.forEach(m=>m.emissiveIntensity=n?2.2:.1);water.material.emissive=new T.Color(n?'#1a6fa0':'#000');box.style.background=n?'#0b1a2e':''};
+$('#bNight').addEventListener('click',()=>setNight(!isNight));
+$('#bRot').addEventListener('click',()=>{O.autoRotate=!O.autoRotate;$('#bRot').setAttribute('aria-pressed',O.autoRotate)});
+$('#bHome').addEventListener('click',()=>{goal={t:new T.Vector3(0,3,0),c:home.clone()};$('#info').hidden=true;sel(null);goal={t:new T.Vector3(0,3,0),c:home.clone()}});
+$('#bLbl').addEventListener('click',()=>{showL=!showL;$('#bLbl').setAttribute('aria-pressed',showL)});
+// resize
+const fit=()=>{const w=box.clientWidth,h=box.clientHeight;R.setSize(w,h,false);C.aspect=w/h;C.fov=w<600?55:42;C.updateProjectionMatrix()};const ro3=new ResizeObserver(fit);ro3.observe(box);fit();
+// visible-only loop
+let vis=true;const io3=new IntersectionObserver(es=>{vis=es[0].isIntersecting;if(vis)loop()});io3.observe(box);
+const clock=new T.Clock();let running=false;
+function loop(){if(running)return;running=true;requestAnimationFrame(frame)}
+function frame(){if(!vis){running=false;return}const dt=Math.min(clock.getDelta(),.05);
+blades.forEach((b,i)=>b.rotation.z+=dt*(1.6+i*.3));cars.forEach(c=>{const u=c.userData;u.a+=u.s*dt;c.position.set(Math.cos(u.a)*u.r,0,Math.sin(u.a)*u.r);c.rotation.y=-u.a+(u.s>0?0:Math.PI)});
+water.position.y=.72+Math.sin(clock.elapsedTime*2)*.03;
+if(goal){O.target.lerp(goal.t,.06);C.position.lerp(goal.c,.06);if(C.position.distanceTo(goal.c)<.3)goal=null}
+O.update();R.render(S,C);
+const w=box.clientWidth,h=box.clientHeight;Object.entries(L).forEach(([id,d])=>{top.copy(tops[id]).project(C);const on=showL&&top.z<1&&Math.abs(top.x)<1.05&&Math.abs(top.y)<1.05;d.style.display=on||id===cur?'':'none';d.style.left=((top.x+1)/2*w)+'px';d.style.top=((1-top.y)/2*h)+'px'});
+requestAnimationFrame(frame)}
+loop();
+}
+}
+</script>
+</body>
+</html>
