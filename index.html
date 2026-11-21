@@ -81,14 +81,14 @@ ol.tasks li::before{content:counter(t);width:34px;height:34px;border-radius:50%;
 video{width:100%;border-radius:18px;background:#000;display:block;border:1px solid var(--line)}
 .problem{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(22px,4vw,48px);align-items:center}
 /* 3D */
-.city{position:relative;height:clamp(420px,62vw,640px);border-radius:24px;overflow:hidden;border:2px solid var(--gold);background:linear-gradient(#bfe6ef,#e9f6e8);box-shadow:0 30px 60px -30px #000c}
+.city{position:relative;height:clamp(540px,64vw,700px);border-radius:24px;overflow:hidden;border:2px solid var(--gold);background:linear-gradient(#bfe6ef,#e9f6e8);box-shadow:0 30px 60px -30px #000c}
 .city canvas{position:absolute;inset:0;width:100%!important;height:100%!important;display:block;touch-action:none}
 .ctrl{position:absolute;top:12px;left:12px;right:12px;display:flex;gap:8px;flex-wrap:wrap;z-index:3}
 .ctrl button{min-height:44px;padding:0 14px;border-radius:12px;border:1px solid #d6a841;background:#082a1fdd;color:#f6eed6;font:600 14px Montserrat;cursor:pointer}
 .ctrl button[aria-pressed=true]{background:var(--gold);color:#1b1505}
 .lbl{position:absolute;z-index:2;transform:translate(-50%,-100%);background:#fffdf5;color:#0c3a2b;border:1px solid #d6a841;border-radius:999px;padding:5px 11px;font:600 12.5px Montserrat;white-space:nowrap;pointer-events:auto;cursor:pointer;box-shadow:0 6px 14px #0003}
 .lbl.sel{background:var(--gold);color:#1b1505}
-.info{position:absolute;z-index:4;right:12px;bottom:12px;width:min(360px,calc(100% - 24px));background:#082a1ff0;color:#eef0e6;border:1px solid var(--gold);border-radius:16px;padding:16px 18px;font-size:14.5px;line-height:1.5}
+.info{position:absolute;z-index:4;right:12px;top:66px;width:min(360px,calc(100% - 24px));background:#082a1ff0;color:#eef0e6;border:1px solid var(--gold);border-radius:16px;padding:16px 18px;font-size:14.5px;line-height:1.5}
 .info h3{color:var(--gold2);font-size:17px;margin-bottom:6px}
 .info .x{position:absolute;top:6px;right:6px;width:40px;height:40px;border:0;background:none;color:#fff;font-size:22px;cursor:pointer}
 .hint{font-size:14px;color:var(--muted);margin-top:10px}
@@ -159,6 +159,42 @@ footer b{color:var(--gold2)}
 @media(max-width:900px){.hero .grid,.two,.problem,.calc,.vids{grid-template-columns:minmax(0,1fr)}.gal{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:170px}.brand{display:none}}
 @media(max-width:600px){.meta{grid-template-columns:minmax(0,1fr)}.badge3d{right:6px}.gal .w2{grid-column:span 2}.lbl{font-size:11px;padding:4px 8px}
 table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--line)}.stack td{display:flow-root;border:0;padding:3px 12px;padding-inline-start:9em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:8.5em;margin-inline-start:-8.6em;white-space:normal;color:var(--muted);font-weight:600}.stack td:empty{display:none}}
+.calc2{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:18px;align-items:start}
+.inp2{display:grid;gap:12px}.inp2 h3,.res2 h3{font-size:20px;margin:0 0 4px}
+.num{display:grid;gap:6px;font-weight:600}.num input,.wtab input{font:600 16px Montserrat;min-height:44px;padding:0 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.wtab input{max-width:110px;text-align:right}.wtab td{vertical-align:middle;padding:8px 10px}.wtab th{background:var(--green);color:#f3f1e7}
+.sl{display:flex;justify-content:space-between;font-weight:600;margin-top:4px}.sl b{color:var(--gold)}
+input[type=range]{width:100%;accent-color:#0c3a2b;height:32px;cursor:pointer}
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.kpi{border-radius:16px;padding:14px 16px}.kpi small{display:block;font-size:13px;opacity:.85}.kpi b{font:800 clamp(20px,2.5vw,30px)/1.15 Unbounded;white-space:nowrap}
+.kpi.dk{background:#0c3a2b;color:#d8e5dc}.kpi.dk b{color:#f0cd7a}.kpi.lt{background:#dcefe2;color:#16261f}
+.sub{font-size:15px!important;margin:22px 0 10px!important}
+.bars{position:relative;height:250px;margin-bottom:30px;display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:clamp(4px,1vw,10px);align-items:end}
+.bar{position:relative;height:100%;display:flex;align-items:flex-end}
+.bar i{display:block;width:100%;height:0;border-radius:7px 7px 2px 2px;background:#d6a841;transition:height 1s cubic-bezier(.2,.8,.2,1),background .4s}
+.bar i.g{background:#3fae6a}
+.bar em{position:absolute;bottom:-24px;left:-6px;right:-6px;text-align:center;font:500 12px Montserrat;color:var(--muted);font-style:normal}
+.bar span{position:absolute;left:50%;transform:translateX(-50%);font:700 11px Montserrat;white-space:nowrap;transition:bottom 1s cubic-bezier(.2,.8,.2,1),opacity .4s}
+.goal{position:absolute;left:0;right:0;border-top:2px dashed #c0392b;z-index:2;pointer-events:none;transition:bottom 1s}
+.goal span{position:absolute;right:0;bottom:4px;font:700 12px Montserrat;color:#c0392b;background:var(--card);padding:0 4px;white-space:nowrap;border-radius:4px}
+.bars:not(.play) i{height:0!important}.bars:not(.play) span{opacity:0}
+.donut{display:grid;grid-template-columns:130px minmax(0,1fr);gap:18px;align-items:center;margin-top:8px}
+.donut circle{transition:stroke-dasharray 1s,stroke-dashoffset 1s}
+#eLeg div{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:3px 0;border-bottom:1px solid var(--line)}#eLeg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:7px}
+.concl{margin-top:16px;padding:14px 16px;border-radius:14px;background:#fff6dc;border:1px solid #f0cd7a;color:#3a2f10;font-size:15px}
+.blds{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:6px}.blds li{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#d6a84114;border-radius:10px;padding:10px 14px;font-size:15px}.blds b{white-space:nowrap}.blds .no{color:#c0392b}
+.chartbox .bar2{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(0);transition:transform .9s cubic-bezier(.2,.8,.2,1)}.chartbox.play .bar2{transform:none}
+.chartbox .ln{stroke-dasharray:1000;stroke-dashoffset:1000;transition:stroke-dashoffset 1.6s .5s}.chartbox.play .ln{stroke-dashoffset:0}
+.chartbox .dot,.chartbox .vl{opacity:0;transition:opacity .6s 1s}.chartbox.play .dot,.chartbox.play .vl{opacity:1}
+.tl{position:absolute;left:12px;right:12px;bottom:12px;z-index:3;background:#082a1fe8;color:#eef0e6;border:1px solid #d6a84199;border-radius:16px;padding:10px 16px 12px}
+.tlh{display:flex;align-items:center;gap:14px}.tlh b{font:800 clamp(24px,3.4vw,36px)/1 Unbounded;color:#f0cd7a;min-width:3.2em}
+.tlh input{flex:1;accent-color:#d6a841}
+.tlh button{min-height:44px;padding:0 14px;border-radius:12px;border:1px solid #d6a841;background:transparent;color:#f6eed6;font:600 14px Montserrat;cursor:pointer;white-space:nowrap}
+.tlh button[aria-pressed=true]{background:#d6a841;color:#1b1505}
+#tT{margin:4px 0 6px;font-size:14.5px;min-height:1.5em}
+.tls{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:#b9cbbf}.tls b{color:#fff;font-size:14px}
+@media(max-width:900px){.calc2{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.city{height:620px}.ctrl{gap:6px}.ctrl button{min-height:40px;padding:0 10px;font-size:13px}.tl{padding:8px 12px 10px;left:8px;right:8px;bottom:8px}.tls{font-size:12px;gap:4px 12px}.tls b{font-size:12.5px}.tlh b{font-size:24px}.tlh button{min-height:40px}.kpis{grid-template-columns:minmax(0,1fr)}.bar span{display:none}.bar:nth-child(10) span{display:block;left:auto;right:0;transform:none}.donut{grid-template-columns:100px minmax(0,1fr)}.tls{gap:10px}#tT{font-size:13px}.tlh{flex-wrap:wrap;gap:8px}.tlh input{order:3;flex-basis:100%}}
 pre,.scroll{overflow-x:auto}
 </style>
 <script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
@@ -241,7 +277,7 @@ pre,.scroll{overflow-x:auto}
 <section class="band deeper" id="city3d"><div class="wrap">
 <span class="kicker">Авторлық 3D SMART CITY</span>
 <h2>Қазақи нақыштағы болашақ қала</h2>
-<p class="lead">Қаланы тышқанмен немесе саусақпен айналдырыңыз, жақындатыңыз. Ғимаратты немесе оның атауын басқанда — оның қызметі шығады.</p>
+<p class="lead">Жыл жолағын жылжытыңыз: 2026 жылғы ластанған қаладан 2036 жылғы ЭКО SMART қалаға дейін ғимараттар қалай салынып, қала қалай жасылданатынын көресіз. Қаланы тышқанмен немесе саусақпен айналдырыңыз, ғимаратты басқанда оның қызметі шығады.</p>
 <div class="city" id="city">
 <div class="ctrl">
 <button id="bRot" aria-pressed="true">Автоайналу</button>
@@ -250,7 +286,8 @@ pre,.scroll{overflow-x:auto}
 <button id="bLbl" aria-pressed="true">Атаулар</button>
 </div>
 <div class="info" id="info" hidden><button class="x" id="infoX" aria-label="Жабу">×</button><h3 id="infoH"></h3><div id="infoP"></div></div>
-<p id="noGL" hidden style="position:absolute;inset:auto 16px 16px;color:#0c3a2b;font-weight:600">3D көрініс бұл құрылғыда ашылмады. Төмендегі тізімнен ғимараттар туралы оқи аласыз.</p>
+<div class="tl"><div class="tlh"><b id="tY">2036</b><input type="range" id="tR" min="2026" max="2036" step="1" value="2036" aria-label="Жылды таңдау"><button id="tPlay" aria-pressed="false">▶ Ойнату</button></div><p id="tT"></p><div class="tls"><span>Көгалдандыру: <b id="tG"></b></span><span>Сұрыптау деңгейі: <b id="tS"></b></span><span>Жылдық табыс: <b id="tI"></b></span></div></div>
+<p id="noGL" hidden style="position:absolute;inset:auto 16px 150px;color:#0c3a2b;font-weight:600">3D көрініс бұл құрылғыда ашылмады. Төмендегі тізімнен ғимараттар туралы оқи аласыз.</p>
 </div>
 <div class="blist" id="blist"></div>
 </div></section>
@@ -275,21 +312,33 @@ pre,.scroll{overflow-x:auto}
 <h2>Сұрыпталған қалдық — қаражат</h2>
 <p class="lead">Мектеп оқушылары мен мұғалімдері макулатура жинаса, қанша түсім болады? Сандарды өзгертіп, өзіңіз есептеңіз.</p>
 <div class="tabs" role="tablist" aria-label="Есеп үлгісі">
-<button class="tab" aria-selected="true" data-pre="0">№169 мектеп-лицейі</button>
-<button class="tab" aria-selected="false" data-pre="1">Алматының 349 мектебі</button>
+<button class="tab" aria-selected="true" data-pre="0">№169 мектеп (2 420 адам)</button>
+<button class="tab" aria-selected="false" data-pre="1">Алматы мектептері (698 000)</button>
+<button class="tab" aria-selected="false" data-pre="2">Бүкіл Алматы (2,2 млн)</button>
 </div>
-<div class="calc">
-<div class="inputs">
-<label for="cP">Адам саны<input id="cP" type="number" min="0" inputmode="numeric" value="2420"></label>
-<label for="cK">Бір адам жылына жинайтын қағаз, кг<input id="cK" type="number" min="0" step="1" value="40"></label>
-<label for="cR">Қабылдау бағасы, теңге/кг<input id="cR" type="number" min="0" step="1" value="40"></label>
-<p class="note" id="cNote" style="margin:0">Оқушы 2240 + мұғалім 180 = 2420 адам. Әр адам тоқсанына 10 кг → жылына 40 кг.</p>
+<div class="calc2">
+<div class="card inp2">
+<h3>Бастапқы деректер</h3>
+<label class="num">Адам саны<input id="eP" type="number" min="0" inputmode="numeric"></label>
+<div class="sl"><label for="eS">Сұрыптауға қатысатындар</label><b id="eSv"></b></div><input type="range" id="eS" min="5" max="100" step="1">
+<div class="sl"><label for="eG">Түсімнің жылдық өсімі</label><b id="eGv"></b></div><input type="range" id="eG" min="0" max="20" step="1">
+<table class="wtab"><thead><tr><th>Қалдық</th><th class="n">кг / адам / жыл</th><th class="n">₸ / кг</th></tr></thead><tbody id="eW"></tbody></table>
+<p class="note" id="eNote"></p>
 </div>
-<div class="result" aria-live="polite">
-<div style="font-size:15px;color:#c9d8cd">Жылдық болжамды түсім</div>
-<div class="big" id="cOut">3 872 000 ₸</div>
-<div class="row"><div>Жиналатын қағаз<b id="cKg">96,8 т</b></div><div>Бір адамнан<b id="cOne">1 600 ₸</b></div><div>10 жылда (өсімсіз)<b id="c10">38 720 000 ₸</b></div></div>
-<div class="formula">Түсім = адам саны × кг × баға</div>
+<div class="card res2" aria-live="polite">
+<h3>Нәтиже</h3>
+<div class="kpis">
+<div class="kpi dk"><small>1 жылдық түсім</small><b id="k1">0</b></div>
+<div class="kpi dk"><small>10 жылда (жинақталған)</small><b id="k10">0</b></div>
+<div class="kpi lt"><small>Полигонға бармайтын қалдық / жыл</small><b id="kT">0</b></div>
+<div class="kpi lt"><small>CO₂ үнемі / жыл ≈ <span id="kTr">0</span> ағаш</small><b id="kC">0</b></div>
+</div>
+<h3 class="sub">Жиналған қор (жинақталған), 2027–2036</h3>
+<div class="bars" id="eBars"></div>
+<div class="donut"><svg id="eDonut" viewBox="0 0 120 120" role="img" aria-label="Түсімнің қалдық түрлері бойынша үлесі"></svg><div><h3 class="sub" style="margin-top:0">Түсімнің үлесі</h3><div id="eLeg"></div></div></div>
+<div class="concl" id="eCon"></div>
+<ul class="blds" id="eB"></ul>
+<p class="note" style="margin:8px 0 0">Тізімде әр нысанға қажетті қаражат жиналатын жыл көрсетілген; құрылыстың өзі 3D қаладағы жоспар бойынша жүреді. Ғимараттардың құны — шартты бағалау (1 м² құрылыс ≈ 400–500 мың ₸). CO₂ коэффициенттері шамамен: қағаз 1,0; пластик 1,5; алюминий 9; шыны 0,3 т CO₂ / т; бір ағаш жылына ≈ 22 кг CO₂ сіңіреді.</p>
 </div>
 </div>
 
@@ -414,12 +463,33 @@ const maps=[['map1','Жоба картасы: аудан жоспары'],['map2
 $('#maps').innerHTML=maps.map(([i,c])=>`<figure class="ph reveal" style="margin:0"><img src="${IMG[i]}" alt="${c}" loading="lazy"><figcaption>${c}</figcaption></figure>`).join('');
 
 /* economy */
-const pre=[{p:2420,k:40,r:40,n:'Оқушы 2240 + мұғалім 180 = 2420 адам. Әр адам тоқсанына 10 кг → жылына 40 кг.'},{p:698000,k:40,r:40,n:'349 мектеп × орта есеппен 2000 адам = 698 000 адам.'}];
-const calc=()=>{const p=+$('#cP').value||0,k=+$('#cK').value||0,r=+$('#cR').value||0,t=p*k*r,kg=p*k;
-$('#cOut').textContent=fmt(t)+' ₸';$('#cKg').textContent=(kg>=1000?(kg/1000).toLocaleString('ru-RU',{maximumFractionDigits:1})+' т':fmt(kg)+' кг');$('#cOne').textContent=fmt(k*r)+' ₸';$('#c10').textContent=fmt(t*10)+' ₸'};
-['#cP','#cK','#cR'].forEach(s=>$(s).addEventListener('input',calc));
-$$('.tab[data-pre]').forEach(b=>b.addEventListener('click',()=>{$$('.tab[data-pre]').forEach(x=>x.setAttribute('aria-selected',x===b));const d=pre[b.dataset.pre];$('#cP').value=d.p;$('#cK').value=d.k;$('#cR').value=d.r;$('#cNote').textContent=d.n;calc()}));
-calc();
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const money=n=>n>=1e9?(n/1e9).toFixed(2).replace('.',',')+' млрд ₸':n>=1e6?(n/1e6).toFixed(1).replace('.',',')+' млн ₸':fmt(n)+' ₸';
+const WT=[{n:'Қағаз, картон',c:'#3fae6a',co:1.0},{n:'Пластик',c:'#2e7dd7',co:1.5},{n:'Алюминий',c:'#d6a841',co:9},{n:'Шыны',c:'#8fb8b0',co:.3}];
+const PRE=[{p:2420,s:100,g:0,kg:[40,0,0,0],pr:[40,40,100,5],n:'Оқушы 2240 + мұғалім 180 = 2420 адам. Әр адам тоқсанына 10 кг қағаз → жылына 40 кг, 1 кг = 40 ₸.'},
+{p:698000,s:100,g:0,kg:[40,0,0,0],pr:[40,40,100,5],n:'349 мектеп × орта есеппен 2000 адам = 698 000 адам. Әр адам жылына 40 кг қағаз.'},
+{p:2200000,s:100,g:10,kg:[10,15,5,20],pr:[40,40,100,5],n:'Алматының 2 200 000 тұрғыны; қалдық түрлері мен бағалары жоба кестесі бойынша, жыл сайынғы өсім 10%.'}];
+const BLD=[['«Қайта түлеу» зауыты',1.6e9],['«Самал» жел-күн паркі',1.3e9],['«Бесік» балабақшасы',.8e9],['«Тайқазан» эко базары',.7e9],['«Шаңырақ» орталығы',2.6e9],['«Домбыра» хабы',1.9e9],['«Тұмар» мұнарасы',2.97e9]];
+const TOTAL=BLD.reduce((a,b)=>a+b[1],0);
+$('#eW').innerHTML=WT.map((w,i)=>`<tr><td><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:${w.c};margin-right:8px"></i>${w.n}</td><td class="n"><input type="number" min="0" step="1" id="wk${i}" aria-label="${w.n}, кг"></td><td class="n"><input type="number" min="0" step="1" id="wp${i}" aria-label="${w.n}, теңге/кг"></td></tr>`).join('');
+$('#eBars').innerHTML=[...Array(10)].map((_,i)=>`<div class="bar"><span></span><i></i><em>${2027+i}</em></div>`).join('')+'<div class="goal"><span></span></div>';
+const tw={};const tween=(id,to,f)=>{const el=$('#'+id),from=tw[id]||0;tw[id]=to;if(RM){el.textContent=f(to);return}const t0=performance.now();const st=n=>{const k=Math.min(1,(n-t0)/700),e=1-(1-k)**3;el.textContent=f(from+(to-from)*e);if(k<1)requestAnimationFrame(st)};requestAnimationFrame(st)};
+const ecalc=()=>{const P=+$('#eP').value||0,sh=(+$('#eS').value)/100,g=(+$('#eG').value)/100;$('#eSv').textContent=Math.round(sh*100)+'%';$('#eGv').textContent=Math.round(g*100)+'%';
+const kg=WT.map((_,i)=>+$('#wk'+i).value||0),pr=WT.map((_,i)=>+$('#wp'+i).value||0),N=P*sh;
+const parts=kg.map((k,i)=>N*k*pr[i]),T0=parts.reduce((a,b)=>a+b,0),tons=N*kg.reduce((a,b)=>a+b,0)/1000,co=N*kg.reduce((a,k,i)=>a+k*WT[i].co,0)/1000;
+const cum=[];let c=0;for(let i=0;i<10;i++){c+=T0*(1+g)**i;cum.push(c)}
+tween('k1',T0,money);tween('k10',c,money);tween('kT',tons,v=>fmt(v)+' т');tween('kC',co,v=>fmt(v)+' т');tween('kTr',co*1000/22,fmt);
+const mx=Math.max(cum[9],TOTAL)*1.12||1;$$('#eBars .bar').forEach((b,i)=>{const h=cum[i]/mx*100,bi=b.querySelector('i');bi.style.height=h+'%';bi.className=cum[i]<TOTAL?'g':'';const sp=b.querySelector('span');sp.style.bottom=`calc(${h}% + 4px)`;sp.textContent=(cum[i]>=1e9?(cum[i]/1e9).toFixed(1):(cum[i]/1e6).toFixed(cum[i]>=1e7?0:1)).replace('.',',')});
+const gl=$('#eBars .goal');gl.style.bottom=(TOTAL/mx*100)+'%';gl.querySelector('span').textContent='Барлық ғимарат: '+money(TOTAL);
+const R0=46,CC=2*Math.PI*R0;let off=0;$('#eDonut').innerHTML=`<circle cx="60" cy="60" r="${R0}" fill="none" stroke="var(--line)" stroke-width="16"/>`+parts.map((p,i)=>{const L=T0?p/T0*CC:0,h=`<circle cx="60" cy="60" r="${R0}" fill="none" stroke="${WT[i].c}" stroke-width="16" stroke-dasharray="${L} ${CC}" stroke-dashoffset="${-off}" transform="rotate(-90 60 60)"/>`;off+=L;return h}).join('')+`<text x="60" y="57" text-anchor="middle" font-size="10" fill="currentColor" opacity=".7">1 адамнан</text><text x="60" y="72" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">${fmt(N?T0/N:0)} ₸</text>`;
+$('#eLeg').innerHTML=parts.map((p,i)=>`<div><span><i style="background:${WT[i].c}"></i>${WT[i].n}</span><b>${T0?Math.round(p/T0*100):0}%</b></div>`).join('');
+let acc=0,yi=0;const built=BLD.map(([n,cost])=>{acc+=cost;while(yi<10&&cum[yi]<acc)yi++;return[n,yi<10?2027+yi:null]});const nb=built.filter(b=>b[1]).length;
+$('#eB').innerHTML=built.map(([n,y])=>`<li><span>${n}</span>${y?`<b>${y} ж. қаражат жетеді</b>`:'<b class="no">қаражат әзірге жетпейді</b>'}</li>`).join('');
+$('#eCon').innerHTML=nb===7?`<b>Қорытынды:</b> 10 жылда барлық 7 нысанды салуға қаражат жетеді, тіпті ${money(c-TOTAL)} артылады — оны көгалдандыруға жұмсауға болады.`:nb?`<b>Қорытынды:</b> 10 жылда ${nb} нысанды салуға қаражат жетеді. Қалғанына қатысушыларды көбейту немесе басқа қалдық түрлерін қосу керек.`:`<b>Қорытынды:</b> бұл ауқымда түсім ғимарат салуға әлі жетпейді (10 жылда ${money(c)}), бірақ мектептің эко-жобаларына жеткілікті. Толық нәтижені көру үшін «Бүкіл Алматы» үлгісін таңдаңыз.`};
+const setPre=i=>{const d=PRE[i];$('#eP').value=d.p;$('#eS').value=d.s;$('#eG').value=d.g;d.kg.forEach((k,j)=>{$('#wk'+j).value=k;$('#wp'+j).value=d.pr[j]});$('#eNote').textContent=d.n;ecalc()};
+$$('.tab[data-pre]').forEach(b=>b.addEventListener('click',()=>{$$('.tab[data-pre]').forEach(x=>x.setAttribute('aria-selected',x===b));setPre(+b.dataset.pre)}));
+document.querySelector('.calc2').addEventListener('input',ecalc);
+setPre(0);
 const wt=[['Пластик',15,40],['Алюминий',5,100],['Шыны',20,5],['Қағаз',10,40]];
 $('#wT').innerHTML=wt.map(([n,k,r])=>`<tr><td>${n}</td><td class="n">${k} кг</td><td class="n">${r} ₸/кг</td><td class="n">${fmt(2200000*k*r)} ₸</td></tr>`).join('');
 const pt=[['Макулатура (қағаз)','40–70 ₸','Кітап, газет, офис қағазы'],['Картон','35–50 ₸','Қораптар'],['Пластик','40–140 ₸','Түріне байланысты'],['Металл','100–140 ₸','Ең тиімді түрі'],['Шыны','5–12 ₸','Ең арзан материал']];
@@ -453,12 +523,13 @@ const fr=$('#frame');if(!rm){fr.parentElement.addEventListener('pointermove',e=>
 const svgEl=(s,html)=>{s.innerHTML=html};
 const ch1=$('#ch1'),draw1=()=>{const W=ch1.clientWidth,H=ch1.clientHeight,l=W<520?30:42,r=W<520?30:42,t=16,b=30,iw=W-l-r,ih=H-t-b,bw=iw/10;let h='';
 for(let v=0;v<=9;v+=3){const y=t+ih-v/9*ih;h+=`<line x1="${l}" x2="${W-r}" y1="${y}" y2="${y}" stroke="currentColor" opacity=".12"/><text x="${l-6}" y="${y+4}" text-anchor="end" font-size="12" fill="currentColor" opacity=".7">${v}</text>`}
-yr.forEach((d,i)=>{const bh=d.inc/9*ih,x=l+i*bw+bw*.18;h+=`<rect x="${x}" y="${t+ih-bh}" width="${bw*.64}" height="${bh}" rx="4" fill="#d6a841"/>`;if(W>=520||i%3===0||i===9)h+=`<text x="${x+bw*.32}" y="${t+ih-bh-5}" text-anchor="middle" font-size="11.5" font-weight="700" fill="currentColor">${d.inc.toFixed(1).replace('.',',')}</text>`;h+=`<text x="${x+bw*.32}" y="${H-10}" text-anchor="middle" font-size="12" fill="currentColor" opacity=".7">${d.y}</text>`});
-const pts=yr.map((d,i)=>[l+i*bw+bw/2,t+ih-d.g/100*ih]);h+=`<polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#2f9e6e" stroke-width="3"/>`+pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="4.5" fill="#2f9e6e" stroke="#fff" stroke-width="1.5"/>`).join('');
+yr.forEach((d,i)=>{const bh=d.inc/9*ih,x=l+i*bw+bw*.18;h+=`<rect class="bar2" style="transition-delay:${i*70}ms" x="${x}" y="${t+ih-bh}" width="${bw*.64}" height="${bh}" rx="4" fill="#d6a841"/>`;if(W>=520||i%3===0||i===9)h+=`<text class="vl" x="${x+bw*.32}" y="${t+ih-bh-5}" text-anchor="middle" font-size="11.5" font-weight="700" fill="currentColor">${d.inc.toFixed(1).replace('.',',')}</text>`;h+=`<text x="${x+bw*.32}" y="${H-10}" text-anchor="middle" font-size="12" fill="currentColor" opacity=".7">${d.y}</text>`});
+const pts=yr.map((d,i)=>[l+i*bw+bw/2,t+ih-d.g/100*ih]);h+=`<polyline class="ln" pathLength="1000" points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#2f9e6e" stroke-width="3"/>`+pts.map(p=>`<circle class="dot" cx="${p[0]}" cy="${p[1]}" r="4.5" fill="#2f9e6e" stroke="#fff" stroke-width="1.5"/>`).join('');
 h+=`<text x="${W-r+6}" y="${t+4}" font-size="12" fill="#2f9e6e">100%</text><text x="${W-r+6}" y="${t+ih+4}" font-size="12" fill="#2f9e6e">0%</text>`;svgEl(ch1,h)};
 const ch2=$('#ch2'),g2=[['2026',1.8,4.5,.5],['2027–28',2.5,3.4,2.4],['2029',3.5,1.8,3.3],['2030',5.5,.8,5.5]],cols=['#3fae6a','#1f5c55','#d6c34f'],draw2=()=>{const W=ch2.clientWidth,H=ch2.clientHeight,l=26,t=14,b=30,iw=W-l-10,ih=H-t-b,gw=iw/4;let h='';
 for(let v=0;v<=6;v+=2){const y=t+ih-v/6*ih;h+=`<line x1="${l}" x2="${W-10}" y1="${y}" y2="${y}" stroke="currentColor" opacity=".12"/><text x="${l-6}" y="${y+4}" text-anchor="end" font-size="12" fill="currentColor" opacity=".7">${v}</text>`}
-g2.forEach((g,i)=>{const bw=gw*.22;[1,2,3].forEach(k=>{const bh=g[k]/6*ih,x=l+i*gw+gw*.14+(k-1)*(bw+3);h+=`<rect x="${x}" y="${t+ih-bh}" width="${bw}" height="${bh}" rx="3" fill="${cols[k-1]}"/>`});h+=`<text x="${l+i*gw+gw/2}" y="${H-10}" text-anchor="middle" font-size="12" fill="currentColor" opacity=".75">${g[0]}</text>`});svgEl(ch2,h)};
+g2.forEach((g,i)=>{const bw=gw*.22;[1,2,3].forEach(k=>{const bh=g[k]/6*ih,x=l+i*gw+gw*.14+(k-1)*(bw+3);h+=`<rect class="bar2" style="transition-delay:${i*150+k*60}ms" x="${x}" y="${t+ih-bh}" width="${bw}" height="${bh}" rx="3" fill="${cols[k-1]}"/>`});h+=`<text x="${l+i*gw+gw/2}" y="${H-10}" text-anchor="middle" font-size="12" fill="currentColor" opacity=".75">${g[0]}</text>`});svgEl(ch2,h)};
+const ioC=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('play');ioC.unobserve(e.target)}}),{threshold:.3});[...$$('.chartbox'),$('#eBars')].forEach(el=>rm?el.classList.add('play'):ioC.observe(el));
 const ro1=new ResizeObserver(draw1);ro1.observe(ch1);const ro2=new ResizeObserver(draw2);ro2.observe(ch2);
 
 /* ===== 3D CITY ===== */
@@ -476,9 +547,29 @@ $('#blist').innerHTML=B.map(b=>`<button data-b="${b.id}">${b.n}</button>`).join(
 const info=(b)=>{$('#infoH').textContent=b.n;$('#infoP').textContent=b.p;$('#info').hidden=false};
 $('#infoX').addEventListener('click',()=>{$('#info').hidden=true;sel(null)});
 let sel=()=>{};
-$$('#blist button').forEach(x=>x.addEventListener('click',()=>{const b=B.find(v=>v.id===x.dataset.b);info(b);sel(b.id);$('#city').scrollIntoView({behavior:rm?'auto':'smooth',block:'center'})}));
+$$('#blist button').forEach(x=>x.addEventListener('click',()=>{const b=B.find(v=>v.id===x.dataset.b);if(+$('#tR').value<BY[b.id]){stopPlay();goY(BY[b.id])}info(b);sel(b.id);$('#city').scrollIntoView({behavior:rm?'auto':'smooth',block:'center'})}));
 
+const TL={2026:['Бастау: қала қоқысқа толы, ауа ластанған. Мектептерде қалдықты сұрыптау басталды.',5,0,0],
+2027:['«Қайта түлеу» зауыты ашылды — қоқыс ресурсқа айнала бастады.',10,100,3.52],
+2028:['«Самал» жел-күн паркі қалаға таза энергия бере бастады.',18,110,3.87],
+2029:['«Бесік» балабақшасы мен «Тайқазан» эко базары ашылды. Қоқыс үйінділері жойылды.',27,121,4.26],
+2030:['«Шаңырақ» орталығы: қала ақылды басқару жүйесіне көшті. Түтін-тұман сейілді.',36,133,4.69],
+2031:['SMART аялдамалар мен сутегі автобустары бүкіл қаланы байланыстырды.',46,146,5.16],
+2032:['«Домбыра» хабы — мәдениет пен цифрлық білім орталығы ашылды.',56,161,5.68],
+2033:['«Тұмар» ақылды мұнарасы салынды: сейсмодатчик, автоматты жарық пен жылу.',65,177,6.25],
+2034:['Жасыл шатырлы ақылды эко-үйлер ауданы бой көтерді.',74,195,6.88],
+2035:['Саябақтар мен гүлзарлар кеңейді, ауа сапасы айтарлықтай жақсарды.',83,214,7.56],
+2036:['ЭКО SMART бейбітшілік қала толық іске қосылды!',92,235,8.30]};
+const BY={zauyt:2027,samal:2028,besik:2029,taiqazan:2029,shanyrak:2030,stop:2031,dombyra:2032,tumar:2033,homes:2034};
+const yearUI=y=>{const d=TL[y];$('#tY').textContent=y;$('#tR').value=y;$('#tT').textContent=d[0];$('#tG').textContent=d[1]+'%';$('#tS').textContent=d[2]?d[2]+'%':'—';$('#tI').textContent=d[3]?d[3].toFixed(2).replace('.',',')+' млрд ₸':'—'};
+let goY=yearUI,playT=null,played=false;
+const stopPlay=()=>{clearInterval(playT);playT=null;$('#tPlay').textContent='▶ Ойнату';$('#tPlay').setAttribute('aria-pressed','false')};
+const play=()=>{let y=+$('#tR').value;if(y>=2036)y=2026;goY(y);$('#tPlay').textContent='❚❚ Тоқтату';$('#tPlay').setAttribute('aria-pressed','true');playT=setInterval(()=>{y++;goY(y);if(y>=2036)stopPlay()},1700)};
+$('#tPlay').addEventListener('click',()=>playT?stopPlay():play());
+$('#tR').addEventListener('input',e=>{stopPlay();goY(+e.target.value)});
+yearUI(2036);
 const box=$('#city');
+const ioP=new IntersectionObserver(es=>{if(es[0].isIntersecting&&!played&&!rm){played=true;play()}},{threshold:.45});ioP.observe(box);
 let ok=false;try{ok=!!window.THREE&&!!document.createElement('canvas').getContext('webgl')}catch(e){}
 if(!ok){$('#noGL').hidden=false}else try{
 const T=THREE;
@@ -578,7 +669,11 @@ for(let y=1.2;y<h-.6;y+=1.4){g.add(mesh(new T.BoxGeometry(2.2,.7,.08),winM(),x,y
 const[x,z]=ang(110,37);place('homes',g,x,z,-110*Math.PI/180-Math.PI/2,9)}
 // plant trees now that spots are reserved
 k=0;let guard=0;while(k<tc&&guard<5000){guard++;const a=rnd()*Math.PI*2,r=9+rnd()*48;const x=Math.cos(a)*r,z=Math.sin(a)*r;if(r>17.5&&r<25.5)continue;if(spots.some(s=>Math.hypot(s[0]-x,s[1]-z)<s[2]))continue;if(z<-48)continue;const sc=.6+rnd()*.8;dm.position.set(x,1.3*sc+.9*sc,z);dm.scale.set(sc,sc,sc);dm.rotation.set(0,0,0);dm.updateMatrix();crown.setMatrixAt(k,dm.matrix);dm.position.set(x,.5*sc,z);dm.updateMatrix();trunk.setMatrixAt(k,dm.matrix);k++}
-crown.count=trunk.count=k;S.add(crown,trunk);
+crown.count=trunk.count=k;S.add(crown,trunk);const treeMax=k;let treeCur=k;
+const trashM=[M('#7a6a55',{flatShading:true}),M('#5d6066',{flatShading:true}),M('#8c7b5c',{flatShading:true})];
+const trash=[];for(let i=0;i<70;i++){const a=rnd()*6.283,r=7+rnd()*42,tx=Math.cos(a)*r,tz=Math.sin(a)*r;if(r>17.5&&r<25.5)continue;if(spots.some(q=>Math.hypot(q[0]-tx,q[1]-tz)<q[2]))continue;const z=.5+rnd()*.9,o=mesh(new T.DodecahedronGeometry(z,0),trashM[i%3],tx,z*.45,tz);o.userData.k=rnd();trash.push(o);S.add(o)}
+const smogM=new T.MeshBasicMaterial({color:'#8d8a7c',transparent:true,opacity:0,depthWrite:false});
+const smog=[];for(let i=0;i<10;i++){const a=i/10*6.283,o=new T.Mesh(new T.SphereGeometry(9+rnd()*6,16,12),smogM);o.position.set(Math.cos(a)*(14+rnd()*14),9+rnd()*5,Math.sin(a)*(14+rnd()*14));o.scale.y=.35;smog.push(o);S.add(o)}
 // lamps
 const lamps=[];for(let i=0;i<16;i++){const a=i/16*Math.PI*2,x=Math.cos(a)*24.4,z=Math.sin(a)*24.4;S.add(mesh(new T.CylinderGeometry(.07,.09,2.6,6),dark,x,1.3,z));const b=mesh(new T.SphereGeometry(.22,10,8),M('#fff3c4',{emissive:'#ffd27a',emissiveIntensity:.1}),x,2.7,z,false);lamps.push(b.material);S.add(b)}
 // cars (hydrogen buses)
@@ -587,16 +682,20 @@ const cars=[];const cc=['#2fb7a0','#ffffff','#d6a841','#3fa7d6','#e94f37'];for(l
 const L={};B.forEach(b=>{const d=document.createElement('div');d.className='lbl';d.textContent=b.n;d.addEventListener('click',e=>{e.stopPropagation();info(b);sel(b.id)});box.appendChild(d);L[b.id]=d});
 const top=new T.Vector3(),bb=new T.Box3();const tops={};Object.entries(G).forEach(([id,g])=>{bb.setFromObject(g);tops[id]=new T.Vector3((bb.min.x+bb.max.x)/2,bb.max.y+.8,(bb.min.z+bb.max.z)/2)});
 let showL=true,cur=null;
+Object.entries(G).forEach(([id,g])=>{g.userData.by=BY[id]||2026;g.userData.s=1});
+let year=2036;const cG0=new T.Color('#b9ab83'),cG1=new T.Color('#8fcf7a'),cS0=new T.Color('#cfc8b6'),cS1=new T.Color('#bfe3ee'),gT=new T.Color(),sT=new T.Color();
+const setYear=y=>{year=y;yearUI(y);const q=(y-2026)/10;gT.copy(cG0).lerp(cG1,Math.min(1,q*1.6));sT.copy(cS0).lerp(cS1,Math.min(1,q*2));if(cur&&G[cur]&&y<G[cur].userData.by){$('#info').hidden=true;sel(null)}};
 sel=id=>{cur=id;Object.entries(L).forEach(([k,d])=>d.classList.toggle('sel',k===id));if(id&&G[id]){O.autoRotate=false;$('#bRot').setAttribute('aria-pressed','false');const t=tops[id];goal={t:new T.Vector3(t.x,t.y*.4,t.z),c:new T.Vector3(t.x*1.6+12,t.y+14,t.z*1.6+12)}}};
 let goal=null;
+goY=setYear;setYear(+$('#tR').value);ground.material.color.copy(gT);S.background.copy(sT);S.fog.color.copy(sT);
 // picking
 const ray=new T.Raycaster(),mv=new T.Vector2();let down=null;
 R.domElement.addEventListener('pointerdown',e=>down=[e.clientX,e.clientY]);
-R.domElement.addEventListener('pointerup',e=>{if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>6)return;const r=R.domElement.getBoundingClientRect();mv.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(mv,C);const h=ray.intersectObjects(Object.values(G),true).find(x=>x.object.userData.id);if(h){const b=B.find(v=>v.id===h.object.userData.id);info(b);sel(b.id)}});
-R.domElement.addEventListener('pointermove',e=>{const r=R.domElement.getBoundingClientRect();mv.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(mv,C);R.domElement.style.cursor=ray.intersectObjects(Object.values(G),true).length?'pointer':'grab'});
+R.domElement.addEventListener('pointerup',e=>{if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>6)return;const r=R.domElement.getBoundingClientRect();mv.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(mv,C);const h=ray.intersectObjects(Object.values(G).filter(g=>g.visible),true).find(x=>x.object.userData.id);if(h){const b=B.find(v=>v.id===h.object.userData.id);info(b);sel(b.id)}});
+R.domElement.addEventListener('pointermove',e=>{const r=R.domElement.getBoundingClientRect();mv.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(mv,C);R.domElement.style.cursor=ray.intersectObjects(Object.values(G).filter(g=>g.visible),true).length?'pointer':'grab'});
 // controls
 let isNight=false;
-const setNight=n=>{isNight=n;$('#bNight').setAttribute('aria-pressed',n);$('#bNight').textContent=n?'Күн':'Түн';S.background.copy(n?night:day);S.fog.color.copy(n?night:day);hemi.intensity=n?.22:.75;sun.intensity=n?.18:1.05;sun.color.set(n?'#9fb4ff':'#fff4dc');winMats.forEach(m=>m.emissiveIntensity=n?(m===glass?.35:1.1):0);lamps.forEach(m=>m.emissiveIntensity=n?2.2:.1);water.material.emissive=new T.Color(n?'#1a6fa0':'#000');box.style.background=n?'#0b1a2e':''};
+const setNight=n=>{isNight=n;$('#bNight').setAttribute('aria-pressed',n);$('#bNight').textContent=n?'Күн':'Түн';hemi.intensity=n?.22:.75;sun.intensity=n?.18:1.05;sun.color.set(n?'#9fb4ff':'#fff4dc');winMats.forEach(m=>m.emissiveIntensity=n?(m===glass?.35:1.1):0);lamps.forEach(m=>m.emissiveIntensity=n?2.2:.1);water.material.emissive=new T.Color(n?'#1a6fa0':'#000');box.style.background=n?'#0b1a2e':''};
 $('#bNight').addEventListener('click',()=>setNight(!isNight));
 $('#bRot').addEventListener('click',()=>{O.autoRotate=!O.autoRotate;$('#bRot').setAttribute('aria-pressed',O.autoRotate)});
 $('#bHome').addEventListener('click',()=>{goal={t:new T.Vector3(0,3,0),c:home.clone()};$('#info').hidden=true;sel(null);goal={t:new T.Vector3(0,3,0),c:home.clone()}});
@@ -610,9 +709,15 @@ function loop(){if(running)return;running=true;requestAnimationFrame(frame)}
 function frame(){if(!vis){running=false;return}const dt=Math.min(clock.getDelta(),.05);
 blades.forEach((b,i)=>b.rotation.z+=dt*(1.6+i*.3));cars.forEach(c=>{const u=c.userData;u.a+=u.s*dt;c.position.set(Math.cos(u.a)*u.r,0,Math.sin(u.a)*u.r);c.rotation.y=-u.a+(u.s>0?0:Math.PI)});
 water.position.y=.72+Math.sin(clock.elapsedTime*2)*.03;
+const kk=Math.min(1,dt*4);Object.values(G).forEach(g=>{const u=g.userData,tg=year>=u.by?1:0;u.s+=(tg-u.s)*kk;const z=Math.max(.001,u.s);g.scale.set(z,z,z);g.visible=z>.01});
+treeCur+=(Math.round(treeMax*TL[year][1]/92)-treeCur)*Math.min(1,dt*2.5);crown.count=trunk.count=Math.max(0,Math.min(treeMax,Math.round(treeCur)));
+const trl=Math.max(0,1-(year-2026)/3);trash.forEach(o=>{const tg=o.userData.k<trl?1:.001,z=o.scale.x+(tg-o.scale.x)*kk;o.scale.set(z,z,z);o.visible=z>.02});
+smogM.opacity+=(.3*Math.max(0,1-(year-2026)/4)-smogM.opacity)*kk;smog.forEach(o=>o.visible=smogM.opacity>.01);
+ground.material.color.lerp(gT,kk);S.background.lerp(isNight?night:sT,kk);S.fog.color.copy(S.background);
+cars.forEach((c,i)=>c.visible=i<(year>=2031?7:2));
 if(goal){O.target.lerp(goal.t,.06);C.position.lerp(goal.c,.06);if(C.position.distanceTo(goal.c)<.3)goal=null;C.lookAt(O.target)}else O.update();
 R.render(S,C);
-const w=box.clientWidth,h=box.clientHeight;Object.entries(L).forEach(([id,d])=>{top.copy(tops[id]).project(C);const on=showL&&top.z<1&&Math.abs(top.x)<1.05&&Math.abs(top.y)<1.05;d.style.display=on||id===cur?'':'none';d.style.left=((top.x+1)/2*w)+'px';d.style.top=((1-top.y)/2*h)+'px'});
+const w=box.clientWidth,h=box.clientHeight;Object.entries(L).forEach(([id,d])=>{top.copy(tops[id]).project(C);const on=showL&&top.z<1&&Math.abs(top.x)<1.05&&Math.abs(top.y)<1.05;d.style.display=(on&&G[id].userData.s>.6)||(id===cur&&G[id].visible)?'':'none';d.style.left=((top.x+1)/2*w)+'px';d.style.top=((1-top.y)/2*h)+'px'});
 requestAnimationFrame(frame)}
 loop();
 }catch(err){console.error(err);$('#noGL').hidden=false}
